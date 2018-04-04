@@ -7,7 +7,6 @@ export function go (url, $router) {
     window.location.href = url
   }
 }
-
 export function getUrl (url, $router) {
   // Make sure the href is right in hash mode
   if ($router && !$router._history && typeof url === 'string' && !/http/.test(url)) {

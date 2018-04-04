@@ -1,0 +1,242 @@
+import jobs from  './jobs'
+export default {
+  house_type: {
+    1: {
+      name: '三室一厅',
+      beds: 3,
+      parlours: 1,
+      bathroom: 1
+    },
+    2: {
+      name: '三室两厅',
+      beds: 3,
+      parlours: 2,
+      bathroom: 1
+    },
+    3: {
+      name: '三室一厅一卫',
+      beds: 3,
+      parlours: 1,
+      bathroom: 1
+    }
+  },
+  rooms: {
+    1: 1,
+    2: 2,
+    3: 3,
+    4: 4,
+    5: 5
+  },
+  halls: {
+    0: 0,
+    1: 1,
+    2: 2,
+    3: 3
+  },
+  bathrooms: {
+    0: 0,
+    1: 1,
+    2: 2,
+    3: 3
+  },
+  cookrooms: {
+    0: 0,
+    1: 1,
+    2: 2,
+    3: 3
+
+  },
+  orientations: {
+    1  :  '东',
+    2  :  '西',
+    3  :  '南',
+    4  :  '北',
+    5  :  '东南',
+    6  :  '西南',
+    7  :  '东北',
+    8  :  '西北',
+    9  :  '南北',
+    10 :  '东西',
+  },
+  decorate_situation: {
+    1: '毛坯',
+    2: '简单装修',
+    3: '中等装修',
+    4: '精装修',
+    5: '豪华装修',
+  },
+  decorate_date: {
+    1: '一年内',
+    2: '一到三年',
+    3: '三到五年',
+    4: '五年以上',
+  },
+  entrust_contract_status: {
+    1:  '待审核',
+    2:  '审核未通过',
+    3:  '审核通过',
+  },
+  min_periods: {
+      1: '3个月',
+      2: '半年',
+      3: '一年'
+  },
+  max_periods: {
+    1: '2年',
+    2: '3年',
+    3: '4年'
+  },
+  renter_type: {
+    1: '整租',
+    2: '合租'
+  },
+  sex: {
+    1: '男',
+    2: '女'
+  },
+  bespeak_time: {
+    1: '全天',
+    2: '上午',
+    3: '下午',
+    4: '6点以后'
+  },
+  bespeak_status: {
+    1: '未约看',
+    2: '已成交',
+    3: '未成交',
+    4: '已取消'
+  },
+  rent_type: {
+    1: '整租',
+    2: '合租'
+  },
+  predefined_lease: {
+    1: '半年以下',
+    2: '半年',
+    3: '一年',
+    4: '一年以上'
+  },
+  check_house_times: {
+    1: '随时',
+    2: '周末',
+    3: '工作日下班后',
+    4: '工作日'
+  },
+  parlourConf: {
+    1: {
+      name: '冰箱',
+      // 控制未选中状态下的图标
+      no_img: require('../assets/images/keting/no_bingxiang.png'),
+      // 控制选中状态下的图标
+      yes_img: require('../assets/images/keting/yes_bingxiang.png')
+    },
+    2: {
+      name: '餐桌',
+      no_img: require('../assets/images/keting/no_canzuo.png'),
+      // 控制选中状态下的图标
+      yes_img: require('../assets/images/keting/yes_canzuo.png')
+    },
+    3: {
+      name: '茶几',
+      no_img: require('../assets/images/keting/no_chaji.png'),
+      // 控制选中状态下的图标
+      yes_img: require('../assets/images/keting/yes_chaji.png')
+    },
+    4: {
+      name: '机顶盒',
+      no_img: require('../assets/images/keting/no_jidinghe.png'),
+      // 控制选中状态下的图标
+      yes_img: require('../assets/images/keting/yes_jidinghe.png')
+    },
+    5: {
+      name: '沙发',
+      no_img: require('../assets/images/keting/no_safa.png'),
+      // 控制选中状态下的图标
+      yes_img: require('../assets/images/keting/yes_safa.png')
+    },
+    6: {
+      name: '电视',
+      no_img: require('../assets/images/keting/no_tv.png'),
+      // 控制选中状态下的图标
+      yes_img: require('../assets/images/keting/yes_tv.png')
+    },
+    7: {
+      name: '衣柜',
+      no_img: require('../assets/images/keting/no_yigui.png'),
+      // 控制选中状态下的图标
+      yes_img: require('../assets/images/keting/yes_yigui.png')
+    }
+  },
+  mainBedRoomConf: {
+    1: {
+      name: '茶几',
+      no_img: require('../assets/images/bedroom/no_chaji.png'),
+      // 控制选中状态下的图标
+      yes_img: require('../assets/images/bedroom/yes_chaji.png')
+    },
+    2: {
+      name: '机顶盒',
+      no_img: require('../assets/images/bedroom/no_jidinghe.png'),
+      // 控制选中状态下的图标
+      yes_img: require('../assets/images/bedroom/yes_jidinghe.png')
+    },
+    3: {
+      name: '坐便器',
+      no_img: require('../assets/images/bedroom/no_zuobianqi.png'),
+      // 控制选中状态下的图标
+      yes_img: require('../assets/images/bedroom/yes_zuobianqi.png')
+    }
+  },
+  bathroomConf: {
+    1: {
+      name: '热水器',
+      no_img: require('../assets/images/bathroom/no_hot_water.png'),
+      // 控制选中状态下的图标
+      yes_img: require('../assets/images/bathroom/yes_hot_water.png')
+    },
+    2: {
+      name: '燃气灶',
+      no_img: require('../assets/images/bathroom/no_ranqi.png'),
+      // 控制选中状态下的图标
+      yes_img: require('../assets/images/bathroom/yes_ranqi.png')
+    },
+    3: {
+      name: '油烟机',
+      no_img: require('../assets/images/bathroom/no_youyanji.png'),
+      // 控制选中状态下的图标
+      yes_img: require('../assets/images/bathroom/yes_youyanji.png')
+    }
+  },
+  around: {
+    '150000': '交通',
+    '140000': '教育',
+    '090000': '医疗',
+    '060000': '购物',
+    '050000': '餐饮',
+    '080000': '娱乐'
+  },
+  relation: {
+    1: '家人',1: '朋友',3: '同事',4: '同学', 5: '密友',6: '其他'
+  },
+  jobs: jobs,
+  tenant_pay_type: {
+    1: '月付',
+    2: '季付',
+    3: '半年付',
+    4: '年付'
+  },
+  tenant_pay_type_detail: {
+    1: {
+      month: 1
+    },
+    2: {
+      month: 3
+    },
+    3: {
+      month: 6
+    },
+    4: {
+      month: 12
+    }
+  }
+}

@@ -1,55 +1,54 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import FastClick from 'fastclick'
 import App from './App'
-import store from './store/store'
+import YDUI from 'vue-ydui'
+import store from './store'
 import router from './router'
 import vuexI18n from 'vuex-i18n'
-import Axios from './libs/axios'
-import { LoadingPlugin } from 'vux'
-
+require('./conf/index')
+import 'vue-ydui/dist/ydui.rem.css'
+import './assets/style/common.less'
+Vue.use(YDUI)
 Vue.use(vuexI18n.plugin, store)
 
-router.beforeEach(function (to, from, next) {
-  // if (to.meta.requireAuth) {
-  //   store.commit('prepareLoad')
-  //   if (sessionStorage.getItem(store.getters['getAccessKey'])) {
-  //     next()
-  //   } else {
-  //     next({
-  //       path: '/login',
-  //       query: {redirect: to.path}
-  //     })
-  //   }
-  // } else {
-  //   if (to.path === '/login' || to.name === 'Login') {
-  //     if (sessionStorage.getItem(store.getters['getAccessKey'])) {
-  //       next(false)
-  //     } else {
-  //       store.commit('prepareLoad')
-  //       next()
-  //     }
-  //   } else {
-  //     store.commit('prepareLoad')
-  //     next()
-  //   }
-  // }
-  store.commit('prepareLoad')
-  next()
+// 图片懒加载
+import VueLazyload from 'vue-lazyload'
+Vue.use(VueLazyload, {
+  error: require('./assets/images/error.png'),
+  loading: require('./assets/images/load.gif'),
+  attempt: 3
 })
 
-router.afterEach(function (to) {
-  store.commit('hasLoad')
+// 二维码
+import VueQriously from 'vue-qriously'
+Vue.use(VueQriously)
+
+// 高德地图
+import VueAMap from 'vue-amap'
+Vue.use(VueAMap)
+VueAMap.initAMapApiLoader({
+  key: 'd9ad499bdc16deccdf5f315a156caa41',
+  plugin: ['AMap.Geolocation']
 })
 
-Vue.use(LoadingPlugin)
-FastClick.attach(document.body)
-Vue.config.productionTip = false
-Vue.prototype.$http = Axios
+
+
+// 输入框和键盘问题
+if (/Android/gi.test(navigator.userAgent)) {
+  window.addEventListener('resize', function () {
+  　　if (document.activeElement.tagName == 'INPUT' || document.activeElement.tagName == 'TEXTAREA') {
+      　　window.setTimeout(function () {
+　　　　　　　　　document.activeElement.scrollIntoViewIfNeeded();
+          }, 0);
+      }
+  })
+}
+
+
 /* eslint-disable no-new */
 new Vue({
+  el: '#app',
   router,
   store,
-  render: h => h(App)
-}).$mount('#app')
+  template: '<App/>',
+  components: { App }
+})
