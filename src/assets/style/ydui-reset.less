@@ -1,0 +1,201 @@
+@import './conf.less';
+
+.@{css-prefix} {
+  &-scrollview::after {
+      height: 0;
+  }
+  &-cell-item:not(:last-child):after {
+      border-bottom: 1px solid @common-border-color;
+  }
+  &-cell-right &-input input[type=date],
+  &-cell-right &-input input[type=datetime-local],
+  &-cell-right &-input input[type=email], 
+  &-cell-right &-input input[type=number]:not(&-spinner-input), 
+  &-cell-right &-input input[type=password], 
+  &-cell-right &-input input[type=tel], 
+  &-cell-right &-input input[type=text], 
+  &-cell-right &-input input[type=time], 
+  &-cell-right &-input input[type=url]{
+      text-align: right;
+  }
+  &-cell-right input[type=date],
+  &-cell-right input[type=datetime-local],
+  &-cell-right input[type=email], 
+  &-cell-right input[type=number]:not(&-spinner-input), 
+  &-cell-right input[type=password], 
+  &-cell-right input[type=tel], 
+  &-cell-right input[type=text], 
+  &-cell-right input[type=time], 
+  &-cell-right input[type=url]{
+      text-align: left;
+  }
+  &-cell-right &-datetime-input{
+      text-align: right;
+      float: right;
+      display: block;
+      line-height: 1rem;
+  }
+  &-cell-right select {
+      direction: rtl;
+      option {
+          direction: ltr;
+      }
+  }
+  
+  &-cell:after {
+      border-bottom: none;
+  }
+  &-cell-item:last-child:after{
+      border-bottom:none;
+  }
+  &-btn-primary {
+      background-color: @theme-color;
+      color: #fff;
+  }
+  &-timeline-item:first-child>&-timeline-icon {
+      background-color: @theme-color;
+      width: 10px;
+      height: 10px;
+  }
+  &-cell-right input[type=checkbox]:not(&-switch):checked+&-cell-checkbox-icon:after, &-cell-right input[type=radio]:checked+&-cell-checkbox-icon:after {
+      color: @theme-color;
+  }
+  &-datetime-head>a:last-child {
+      color: @theme-color;
+  }
+  &-btn-primary:active{
+      background-color: #955be6;
+  }
+  &-btn-block {
+      font-size: @btn-font-size;
+      height: @btn-height;
+      margin-top: @btn-margin-top;
+  }
+  &-tab-nav &-tab-active {
+      color: @theme-color;
+  }
+  &-timeline-content>li:first-child>em {
+      background-color: @theme-color;
+  }
+  &-timeline-content>li:first-child:before {
+      background-color: #e7c7f7;
+  }
+  &-cell-box {
+      margin-bottom: @cell-box-margin-bottom;
+  }
+  &-grids-item {
+      padding: .35rem 0 0 0;
+  }
+  &-grids-txt {
+      padding: .15rem .2rem;
+  }
+  &-grids-item:after {
+      border-bottom: none;
+  }
+  &-grids-3 &-grids-item:not(:nth-child(3n)):before{
+      height: 60%;
+      margin-top: 20%;
+  }
+  &-grid3-bo-border &-grids-item:not(:nth-child(3n)):before{
+      border:none;
+  }
+  &-grids-3:before {
+      border-bottom: none;
+  }
+  &-grids-4 &-grids-item:not(:nth-child(4n)):before {
+      border-right: none;
+  }
+  &-grids-4:before {
+      border-bottom: none;;
+  }
+  &-grids-5:before {
+      border-bottom: none; 
+  }
+  &-grids-5 &-grids-item:not(:nth-child(5n)):before {
+      border-right: none;
+  }
+  &-grids-icon {
+      height: .78rem;
+  }
+  &-grids-icon img {
+      height: 90%;
+  }
+  &-grids-5 &-grids-icon {
+      height: .98rem;
+  }
+  &-grids-5 &-grids-icon img {
+      height: 100%;
+  }
+  &-btn, &-btn-block{
+      border-radius:0px;
+  }
+  &-btn-circle {
+      border-radius: 200px;
+  }
+  &-tabbar-icon img {
+      height: 90%;
+  }
+  &-cell:after {
+      border-bottom: none;
+  }
+  &-cell-right {
+      color: #a5a5a5;
+      font-size: .3rem;
+  }
+  &-cell-icon {
+      margin-right: 0;
+  }
+  &-cell-right input[type=checkbox]:not(&-switch)+&-cell-radio-icon:after, &-cell-right input[type=radio]+&-cell-radio-icon:after {
+      color: @theme-color;
+  }
+  &-textarea textarea {
+      font-size: @gray-font-size;
+  }
+  &-flexbox-item{
+      height:100%;
+  }
+  &-backtop{
+      bottom:9%;
+  }
+  &-accordion-title>span {
+      color: @text-gray;
+  }
+  &-confirm-ft>a.primary {
+      color: @theme-color;
+  }
+  &-confirm-hd{
+      text-align: center;
+      padding: .24rem;
+      font-size: 17px; 
+  }
+  &-confirm{
+      border-radius:5px;
+  }
+  &-slider{
+      height:100%;
+  }
+  &-cell-left select {
+      -webkit-box-flex: 1;
+      -webkit-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+      height: 1rem;
+      border: none;
+      display: block;
+      color: #a9a9a9;
+      font-size: .3rem;
+      margin-left: -.08rem;
+  }
+  &-accordion-title {
+      font-size: .3rem;
+  }
+  &-popup-content > :first-child {
+      height: 100%;
+  }
+  &-popup-content{
+      background: #fff;
+  }
+  &-tab-panel{
+      background: transparent;
+  }
+}

@@ -7,9 +7,8 @@ module.exports = {
     index: path.resolve(__dirname, '../dist/index.html'),
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
-    // 该参数是在build的时候生成对应的.map文件  map文件是因为css  js  混淆等后在调试是无法定位  map文件是对编译后的文件的说明 指明对应函数的位置
-    productionSourceMap: true,
+    assetsPublicPath: './',
+    productionSourceMap: false,
     // Gzip off by default as many popular static hosts such as
     // Surge or Netlify already gzip all static assets for you.
     // Before setting to `true`, make sure to:
@@ -24,18 +23,20 @@ module.exports = {
   },
   dev: {
     env: require('./dev.env'),
-    port: 8082,
-    autoOpenBrowser: false,
+    host: '0.0.0.0',
+    port: 9092,
+    autoOpenBrowser: true,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {
-      '/api': {
-        target: 'http://xy.zh5j.com:9803/',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/api': ''
-        }
-      }
+    // proxyTable: {},
+    proxyTable: { 
+      '/kc': {  //使用"/api"来代替"http://f.apiplus.c" 
+        target: 'http://www.baidu.com', //源地址 
+        changeOrigin: true, //改变源 
+        pathRewrite: { 
+          '^/kc': '/kc/' //路径重写 
+          } 
+      } 
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README

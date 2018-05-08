@@ -1,4 +1,4 @@
-# xymanager
+# ydui
 
 > A Vue.js project
 

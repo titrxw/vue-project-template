@@ -1,5 +1,7 @@
 <template>
-    <img src="../../assets/images/wait.png">
+  <div>
+      <img src="../../assets/images/wait.png">
+  </div>
 </template>
 <script>
 import api from '../../api'
@@ -28,11 +30,13 @@ export default {
       this.$router.push(path)
     } else if (!sessionStorage.getItem('openId') || sessionStorage.getItem('openId') === '') {
       this.wechatAuth()
+    } else {
+      this.$router.push('/')
     }
   }
 }
 </script>
-<style scoped lang="less">
+<style scoped>
 img{
   width: 160px;
   margin:0 auto;

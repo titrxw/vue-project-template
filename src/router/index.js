@@ -16,56 +16,42 @@ router.beforeEach(function (to, from, next) {
     document.title = title
   }
 
+  // 检测token是否过期 2小时在线（前5分钟过期）
+  let lastTime = sessionStorage.getItem('last_login_time')
+  let curTime = Date.parse(new Date()) / 1000;
+  if (lastTime && (curTime - lastTime) > ( 2 * 60 * 55 )) {
+    sessionStorage.removeItem('token')
+  }
+
+
   let token = sessionStorage.getItem('token')
-
-  // if (to.meta.requireWechatAuth === true && sessionStorage.getItem('wechatAuth') != 'true') {
-  //   sessionStorage.setItem('redirect', to.fullPath)
-  //   next({
-  //     path: '/auth'
-  //   })
-  // } else {
-  //   if (to.meta.requireLogin === true && !token) {
-  //     sessionStorage.setItem('redirect', to.fullPath)
-  //     next({
-  //       path: '/login'
-  //     })
-  //   } else {
-  //     if (to.meta.requireUserAuth === true && sessionStorage.getItem('userAuthStatus') != 2) {
-  //       next({path: to.meta.userAuthPath, query: {from: to.path}})
-  //     } else {
-  //       if ((to.path === '/login' || to.name === 'Login') && token) {
-  //         next({
-  //           path: '/'
-  //         })
-  //       } else {
-  //         next()
-  //       }
-  //     }
-  //   }
-  // }
-
-  // 不需要微信认证的路由
-  if (to.meta.requireLogin === true && !token) {
+  // 检测微信授权
+  if (Vue.ENV_PRODUCATION && to.meta.requireWechatAuth === true && sessionStorage.getItem('wechatAuth') != 'true') {
     sessionStorage.setItem('redirect', to.fullPath)
     next({
-      path: '/login'
+      path: '/auth'
     })
   } else {
-    if (to.meta.requireUserAuth === true && sessionStorage.getItem('userAuthStatus') != 2) {
-      next({path: to.meta.userAuthPath, query: {from: to.path}})
+    // 账户绑定认证
+    if (to.meta.requireLogin === true && !token) {
+      sessionStorage.setItem('redirect', to.fullPath)
+      next({
+        path: '/login'
+      })
     } else {
-      if ((to.path === '/login' || to.name === 'Login') && token) {
-        next({
-          path: '/'
-        })
+      // 业务 用户实名认证验证
+      if (to.meta.requireUserAuth === true && sessionStorage.getItem('userAuthStatus') != 3) {
+        next({path: to.meta.userAuthPath, query: {from: to.path}})
       } else {
-        if ((to.path === '/login' || to.name === 'Login') && !sessionStorage.getItem('redirect')) {
-          sessionStorage.setItem('redirect', '/')
+        if ((to.path === '/login' || to.name === 'Login') && token) {
+          next({
+            path: '/'
+          })
+        } else {
+          next()
         }
-        next()
       }
     }
   }
 })
-
 export default router

@@ -1,34 +1,43 @@
 
 import Vue from 'vue'
-import constant from './constant'
-Vue.prototype.sysConstant = constant;
+import devConf from './dev'
+import producationConf from './producation'
 
-/**
- * 全局函数 配置用户类型
- */
-Vue.prototype.getRenterType = function () {
-  return 1
-}
-Vue.prototype.getProprietorType = function () {
-  return 2
-}
-Vue.prototype.getCurrentUserType = function () {
-  let userType = sessionStorage.getItem('userType')
-  if (userType == null) {
-    userType = 1
-  }
-  return parseInt(userType)
+
+if (Vue.ENV_PRODUCATION) {
+  // Vue.prototype.imgHost = 'http://1zuty.com/uploads/'
+  // Vue.prototype.uploadApiHost = 'http://1zuty.com/upload/kc/system/upload'
+  Vue.prototype.imgHost = 'https://baidu.com/uploads/'
+  Vue.prototype.uploadApiHost = 'https://baidu.com/upload/kc/system/upload'
+  Vue.prototype.sysConstant = producationConf
+} else {
+  Vue.prototype.imgHost = 'https://baidu.com/uploads/'
+  Vue.prototype.uploadApiHost = 'https://baidu.com/upload/kc/system/upload'
+  sessionStorage.setItem('openId', 'oxrQJ1OvL8uk3lzvjtZE9PyzC07U')
+  Vue.prototype.sysConstant = devConf
 }
 
 
-Vue.prototype.serviceTel = ''
+// 图片懒加载
+import VueLazyload from 'vue-lazyload'
+Vue.use(VueLazyload, {
+  error: require('../assets/images/error.png'),
+  loading: require('../assets/images/load.gif'),
+  attempt: 3
+})
 
-Vue.prototype.imgHost = ''
-Vue.prototype.uploadApiHost = ''
-Vue.prototype.amaApiKey = ''
 
-Vue.prototype.faceApiKey = '_BoKIQ8_'
-Vue.prototype.faceApiSecret = '-WFDLFezjhjur'
+// 输入框和键盘问题
+if (/Android/gi.test(navigator.userAgent)) {
+  window.addEventListener('resize', function () {
+  　　if (document.activeElement.tagName == 'INPUT' || document.activeElement.tagName == 'TEXTAREA') {
+      　　window.setTimeout(function () {
+　　　　　　　　　document.activeElement.scrollIntoViewIfNeeded();
+          }, 0);
+      }
+  })
+}
 
 
-sessionStorage.setItem('openId', 'oGhJPwTVma-1oJBpnf-xEZTcnuQA')
+
+

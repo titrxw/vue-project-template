@@ -67,7 +67,10 @@ var webpackConfig = merge(baseWebpackConfig, {
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency'
     }),
-    // split vendor js into its own file
+    new webpack.optimize.CommonsChunkPlugin({
+        names: ["vendor4","vendor3","vendor2","vendor1"],
+        minChunks: Infinity
+    }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: function (module, count) {

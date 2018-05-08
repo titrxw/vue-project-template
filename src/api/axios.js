@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import axios from 'axios'
 import store from '../store'
 import router from '../router'
@@ -5,6 +6,7 @@ import qs from 'qs'
 // 配置
 axios.defaults.timeout = 50000
 axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
+axios.defaults.baseURL = Vue.ENV_PRODUCATION ? 'http://www.baidu.com/kc/' : 'kc'
 
 axios.interceptors.request.use(
   config => {
@@ -25,11 +27,16 @@ axios.interceptors.request.use(
     return config
   },
   error => {
-    return Promise.reject(error)
+    store.commit('msg', '系统错误')
+    return false
   }
 )
 axios.interceptors.response.use(
   response => {
+    if (typeof response.data == 'string') {
+      store.commit('msg', '系统错误')
+      return false
+    }
     switch (response.data.ret) {
       case 200:
         return response.data.data

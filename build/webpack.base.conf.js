@@ -1,8 +1,5 @@
 var path = require('path')
 var utils = require('./utils')
-var projectRoot = path.resolve(__dirname, '../')
-const vuxLoader = require('vux-loader')
-
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
 
@@ -10,8 +7,12 @@ function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
-var webpackConfig = {
+module.exports = {
   entry: {
+    "vendor1": ["vue-lazyload"],
+    "vendor2": ["vue-qriously"],
+    "vendor3": ["vue-amap"],
+    "vendor4": ["vue-ydui"],
     app: './src/main.js'
   },
   output: {
@@ -25,21 +26,12 @@ var webpackConfig = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      '@': resolve('src'),
-      'jquery': 'jquery'
+      '@': resolve('src')
+      // 'jquery': 'jquery'
     }
   },
   module: {
     rules: [
-      {
-        test: /\.(js|vue)$/,
-        loader: 'eslint-loader',
-        enforce: 'pre',
-        include: [resolve('src'), resolve('test')],
-        options: {
-          formatter: require('eslint-friendly-formatter')
-        }
-      },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
@@ -59,6 +51,14 @@ var webpackConfig = {
         }
       },
       {
+        test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: utils.assetsPath('media/[name].[hash:7].[ext]')
+        }
+      },
+      {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'url-loader',
         options: {
@@ -69,5 +69,3 @@ var webpackConfig = {
     ]
   }
 }
-const vuxConfig = require('./vux-config')
-module.exports = vuxLoader.merge(webpackConfig, vuxConfig)

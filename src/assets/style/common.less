@@ -1,191 +1,22 @@
 @import './conf.less';
+@import './ydui-reset.less';
+@import './border.less';
+// @import './reset.css';
+// ydui 中带有reset css
 
 
-
-.@{css-prefix} {
-    &-scrollview::after {
-        height: 0;
-    }
-    &-cell-item:not(:last-child):after {
-        border-bottom: 1px solid @common-border-color;
-    }
-    &-cell-right &-input input[type=date],
-    &-cell-right &-input input[type=datetime-local],
-    &-cell-right &-input input[type=email], 
-    &-cell-right &-input input[type=number]:not(&-spinner-input), 
-    &-cell-right &-input input[type=password], 
-    &-cell-right &-input input[type=tel], 
-    &-cell-right &-input input[type=text], 
-    &-cell-right &-input input[type=time], 
-    &-cell-right &-input input[type=url]{
-        text-align: right;
-    }
-    &-cell-right input[type=date],
-    &-cell-right input[type=datetime-local],
-    &-cell-right input[type=email], 
-    &-cell-right input[type=number]:not(&-spinner-input), 
-    &-cell-right input[type=password], 
-    &-cell-right input[type=tel], 
-    &-cell-right input[type=text], 
-    &-cell-right input[type=time], 
-    &-cell-right input[type=url]{
-        text-align: left;
-    }
-    &-cell-right &-datetime-input{
-        text-align: right;
-        float: right;
-        display: block;
-        line-height: 1rem;
-    }
-    &-cell-right select {
-        direction: rtl;
-        option {
-            direction: ltr;
-        }
-    }
-    
-    &-cell:after {
-        border-bottom: none;
-    }
-    &-cell-item:last-child:after{
-        border-bottom:none;
-    }
-    &-btn-primary {
-        background-color: @theme-color;
-        color: #fff;
-    }
-    &-timeline-item:first-child>&-timeline-icon {
-        background-color: @theme-color;
-        width: 10px;
-        height: 10px;
-    }
-    &-cell-right input[type=checkbox]:not(&-switch):checked+&-cell-checkbox-icon:after, &-cell-right input[type=radio]:checked+&-cell-checkbox-icon:after {
-        color: @theme-color;
-    }
-    &-datetime-head>a:last-child {
-        color: @theme-color;
-    }
-    &-btn-primary:active{
-        background-color: #955be6;
-    }
-    &-btn-block {
-        font-size: @btn-font-size;
-        height: @btn-height;
-        margin-top: @btn-margin-top;
-    }
-    &-tab-nav &-tab-active {
-        color: @theme-color;
-    }
-    &-timeline-content>li:first-child>em {
-        background-color: @theme-color;
-    }
-    &-timeline-content>li:first-child:before {
-        background-color: #e7c7f7;
-    }
-    &-cell-box {
-        margin-bottom: @cell-box-margin-bottom;
-    }
-    &-grids-item {
-        padding: .35rem 0 0 0;
-    }
-    &-grids-icon {
-        height: .78rem;
-    }
-    &-grids-icon img {
-        height: 90%;
-    }
-    &-grids-txt {
-        padding: .15rem .2rem;
-    }
-    &-grids-item:after {
-        border-bottom: none;
-    }
-    &-grids-3 &-grids-item:not(:nth-child(3n)):before{
-        height: 60%;
-        margin-top: 20%;
-    }
-    &-grid3-bo-border &-grids-item:not(:nth-child(3n)):before{
-        border:none;
-    }
-    &-grids-3:before {
-        border-bottom: none;
-    }
-    &-grids-4 &-grids-item:not(:nth-child(4n)):before {
-        border-right: none;
-    }
-    &-grids-4:before {
-        border-bottom: none;;
-    }
-    &-btn, &-btn-block{
-        border-radius:0px;
-    }
-    &-btn-circle {
-        border-radius: 200px;
-    }
-    &-tabbar-icon img {
-        height: 90%;
-    }
-    &-cell:after {
-        border-bottom: none;
-    }
-    &-cell-right {
-        color: #a5a5a5;
-        font-size: .3rem;
-    }
-    &-cell-icon {
-        margin-right: 0;
-    }
-    &-cell-right input[type=checkbox]:not(&-switch)+&-cell-radio-icon:after, &-cell-right input[type=radio]+&-cell-radio-icon:after {
-        color: @theme-color;
-    }
-    &-textarea textarea {
-        font-size: @gray-font-size;
-    }
-    &-flexbox-item{
-        height:100%;
-    }
-    &-backtop{
-        bottom:9%;
-    }
-    &-accordion-title>span {
-        color: @text-gray;
-    }
-    &-confirm-ft>a.primary {
-        color: @theme-color;
-    }
-    &-confirm-hd{
-        text-align: center;
-        padding: .24rem;
-        font-size: 17px; 
-    }
-    &-confirm{
-        border-radius:5px;
-    }
-    &-slider{
-        height:100%;
-    }
-    &-cell-left select {
-        -webkit-box-flex: 1;
-        -webkit-flex: 1;
-        -ms-flex: 1;
-        flex: 1;
-        height: 1rem;
-        border: none;
-        display: block;
-        color: #a9a9a9;
-        font-size: .3rem;
-        margin-left: -.08rem;
-    }
-    &-accordion-title {
-        font-size: .3rem;
-    }
-    &-popup-content > :first-child {
-        height: 100%;
-    }
-    &-tab-panel{
-        background: transparent;
-    }
+.send-msg .yd-btn-warning {
+    background: #fff;
+    color: @theme-color;
 }
+.send-msg .yd-btn-disabled{
+    background: #fff;
+    color:#666;
+}
+.swiper-lazy-preloader-white::after {
+    background-image: url('../images/load.gif') !important;
+}
+
 
 *{
   font-family: @theme-font-family;
@@ -196,6 +27,9 @@ body{
 }
 button, input, select, textarea {
     font: 100% tahoma,@theme-font-family,arial;
+}
+img{
+    border:none;
 }
 .font-size-12{
     font-size: 12px;
@@ -270,6 +104,9 @@ button, input, select, textarea {
         text-align:right;
     }
 }
+.background-fff{
+    background: #fff;
+}
 .auto-break-line{
     word-wrap: break-word;
 }
@@ -299,6 +136,37 @@ button, input, select, textarea {
     -webkit-transform-origin: 0 0;
     transform-origin: 0 0;
 }
+.text-over-ellipsis{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.lazy-load-box{
+    height:100%;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+img[lazy=loaded] {
+    /*your style here*/
+    width:100%;
+    height:100%;
+    display: block;
+}
+img[lazy=loading] {
+    /*your style here*/
+    width: 40px;
+    margin:0 auto;
+}
+img[lazy=error] {
+    width: 100%;
+    height: 100%;
+    padding: .12rem;
+    margin: 0 auto;
+    max-width: 180px;
+    max-height: 115px;
+}
 
 
 
@@ -327,57 +195,8 @@ button, input, select, textarea {
 .hairline .yd-scrollview {
     margin-top: 0px;
 }
-.text-over-ellipsis{
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-}
-.lazy-load-box{
-    height:100%;
-    width: 100%;
-    text-align: center;
-    display: flex;
-    align-items: center;
-}
-img[lazy=loaded] {
-    /*your style here*/
-    width:100%;
-    height:100%;
-    display: block;
-}
-img[lazy=loading] {
-    /*your style here*/
-    width: 40px;
-    margin:0 auto;
-}
-img[lazy=error] {
-    width: 90%;
-    margin:0 auto;
-}
 .bills .yd-weui-cell {
     padding: 5px 15px;
-}
-.fix-bottom{
-    position: fixed;
-    width: 100%;
-    bottom: 0px;
-    z-index: 1501;
-    background: #f5f5f5;
-    .yd-btn-block{
-        margin-top:0px;
-    }
-}
-.fix-bottom-content{
-    margin-bottom: 1.3rem;
-}
-.fix-top{
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1501;
-}
-.fix-top-content{
-    margin-top: 1rem;
 }
 .success-page{
     height: 100%;
@@ -391,60 +210,15 @@ img[lazy=error] {
     line-height: 1rem;
     margin-left:.24rem;
 }
-.background-fff{
-    background: #fff;
+.button-box{
+padding: @theme-padding/2;
+.yd-flexbox-item{
+    margin: .12rem;
+}  
 }
-.upload-imgs{
-    padding:10px;
-  }
-  .upload-box{
-    height:58px;
-    width:58px;
-    background: url('../../assets/images/upload.png');
-    background-size: 74% 80%;
-    padding: 10px;
-    background-repeat: no-repeat;
-    background-position-x: 49%;
-    background-position-y: 50%;
-    border: 1px solid #d3d3d3;
-  }
-  .upload-del{
-    top: 3px;
-    right: 3px;
-    width: 15px;
-    height: 15px;
-    background: red;
-    display: block;
-    position: absolute;
-    z-index: 100;
-    margin-left: 45px;
-    background: url('../../assets/images/close.png');
-    background-size: 15px;
-  }
-  .upload-list{
-    display: inline-block;
-    width: 60px;
-    height: 60px;
-    text-align: center;
-    line-height: 60px;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    overflow: hidden;
-    background: #fff;
-    position: relative;
-    box-shadow: 0 1px 1px rgba(0,0,0,.2);
-    margin-right: 4px;
-    img{
-      width:100%;
-      height:100%;
-    }
-  }
-  .button-box{
-    padding: @theme-padding/2;
-    .yd-flexbox-item{
-      margin: .12rem;
-    }  
-  }
-  .full-slider .yd-slider-pagination{
-      bottom:.5rem;
-  }
+.full-slider .yd-slider-pagination{
+    bottom:.5rem;
+}
+.lock .yd-slider-pagination-item-active {
+    background-color: rgb(255,180,76);
+}

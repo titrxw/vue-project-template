@@ -1,5 +1,4 @@
 import ajax from './axios'
-ajax.defaults.baseURL = 'http://host.api.com'
 
 // 微信认证获取跳转地址接口
 const wechatAuthUrl = 'common/getWechatAuthUrl'
@@ -46,16 +45,22 @@ const faceAuthCardUrl = 'https://api-cn.faceplusplus.com/cardpp/v1/ocridcard'
 const houseListUrl = 'house/houseList'
 const houseDetailUrl = 'house/houseDetail'
 const houseBaseInfoUrl = 'house/houseInfo'
+const housePriceRemindUrl = 'member/housePriceRemind'
 
 // 约看
-const bespeakListUrl = 'housesee/houseSeeList'
-const addBespeakUrl = 'housesee/houseSeeAdd'
-const calcelBespeakUrl = 'housesee/houseSeeCancel'
-const deleteBespeakUrl = 'housesee/houseSeeDelete'
+const hoodListUrl = 'house/neighbourhoodList'
+const bespeakListUrl = 'member/houseSeeList'
+const addBespeakUrl = 'member/houseSeeAdd'
+const calcelBespeakUrl = 'member/houseSeeCancel'
+const deleteBespeakUrl = 'member/houseSeeDelete'
 
 // 求租
-const addSocilitUrl = 'housesee/houseSolicit'
-
+const addSocilitUrl = 'member/houseSolicit'
+const socilitListUrl = 'member/solicitList'
+const socilitInfoUrl = 'member/solicitInfo'
+const socilitDetailUrl = 'member/solicitDetail'
+const socilitUpdateUrl = 'member/solicitUpdate'
+const socilitDeleteUrl = 'member/removeSolicit'
 
 // 专题
 const specialListUrl = 'content/contentList'
@@ -66,8 +71,7 @@ const tenantContractDetailUrl = 'tenant/tenantContractDetail'
 
 // 门锁
 const getLocksUrl = 'member/getLockInfo'
-const changeLockPasswordUrl = 'member/changeLockPassword'
-const getDynamicPwdUrl = 'member/getDynamicPassword'
+const setLockPasswordUrl = 'member/setLockPassword'
 const openLockUrl = 'member/openLock'
 const getTemporaryPasswordUrl = 'member/getTemporaryPassword'
 const changeLockStatusUrl = 'member/changeLockStatus'
@@ -75,7 +79,19 @@ const clearAllPasswordUrl = 'member/clearAllPassword'
 const getOpenRecordUrl = 'member/getOpenRecord'
 
 // 签约
-const getSigningInfoUrl = 'house/getSigningInfo'
+const getSigningInfoUrl = 'tenant/getSigningInfo'
+const tenantContractAddUrl = 'tenant/tenantContractAdd'
+
+// 委托签约
+const entrustContractSignUrl = 'entrust/entrustContractSign'
+const silentEntrustSignUrl = 'entrust/silentEntrustSign'
+
+//收藏
+const collectListUrl = 'member/collectionList'
+const collectionUrl  = 'member/collection'
+
+//小区
+const vullageDetailUrl  = 'house/neighbourhoodDetail'
 
 export default {
   // 微信认证获取跳转路径接口
@@ -178,13 +194,16 @@ export default {
 
   // 房源
   houseList (params) {
-    return ajax.post(houseListUrl, params)
+    return ajax.post(houseListUrl, {form: params})
   },
   houseDetail (params) {
     return ajax.post(houseDetailUrl, params)
   },
   houseBaseInfo (params) {
     return ajax.post(houseBaseInfoUrl, params)
+  },
+  housePriceRemind (params) {
+    return ajax.post(housePriceRemindUrl, {form: params})
   },
 
   //约看
@@ -205,7 +224,25 @@ export default {
   addSocilit (params) {
     return ajax.post(addSocilitUrl, {form: params})
   },
-  
+  socilitList (params) {
+    return ajax.post(socilitListUrl, params)
+  },
+  socilitInfo (params) {
+    return ajax.post(socilitInfoUrl, params)
+  },
+  socilitDetail (params) {
+    return ajax.post(socilitDetailUrl, params)
+  },
+  socilitUpdate (params) {
+    return ajax.post(socilitUpdateUrl, {form: params})
+  },
+  socilitDelete (params) {
+    return ajax.post(socilitDeleteUrl, params)
+  },
+  hoodList (params) {
+    return ajax.post(hoodListUrl, params)
+  },
+
   // 专题
   specialList () {
     return ajax.post(specialListUrl)
@@ -223,11 +260,8 @@ export default {
   getLocks () {
     return ajax.post(getLocksUrl)
   },
-  changeLockPassword (params) {
-    return ajax.post(changeLockPasswordUrl, {form: params})
-  },
-  getDynamicPwd (params) {
-    return ajax.post(getDynamicPwdUrl, {form: params})
+  setLockPassword (params) {
+    return ajax.post(setLockPasswordUrl, {form: params})
   },
   openLock (params) {
     return ajax.post(openLockUrl, params)
@@ -248,5 +282,29 @@ export default {
   // 签约信息
   getSigningInfo (params) {
     return ajax.post(getSigningInfoUrl, params)
+  },
+  tenantContractAdd (params) {
+    return ajax.post(tenantContractAddUrl, {form: params})
+  },
+
+  // 委托签约
+  entrustContractSign (params) {
+    return ajax.post(entrustContractSignUrl, params)
+  },
+  silentEntrustSign (params) {
+    return ajax.post(silentEntrustSignUrl, params)
+  },
+
+  //收藏
+  collectList (params) {
+    return ajax.post(collectListUrl, {form: params})
+  },
+  collection (params) {
+    return ajax.post(collectionUrl, {form: params})
+  },
+
+  //小区
+  villageDetail (params) {
+    return ajax.post(vullageDetailUrl, params)
   }
 }
