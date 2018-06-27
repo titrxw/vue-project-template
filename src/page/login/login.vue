@@ -25,7 +25,7 @@
   </div>
 </template>
 <script>
-import api from "../../api";
+import api from "@/api/auth";
 import Validate from "../../libs/validate";
 export default {
   data() {
@@ -35,20 +35,13 @@ export default {
       tryLogin: true,
       form: {
         mobile: "",
-        code: "",
-        openid: sessionStorage.getItem("openId")
+        code: ""
       }
     };
   },
   methods: {
     afterLogin(result) {
       // 保存token以及登录时间
-      sessionStorage.setItem("token", result.token);
-      sessionStorage.setItem('last_login_time', Date.parse(new Date()) / 1000);
-
-      // 用户实名认证状态
-      this.$store.commit("userAuthStatus", result.approveStatus);
-
       // 上一步路径
       let path = sessionStorage.getItem("redirect");
       sessionStorage.removeItem("redirect");
@@ -86,9 +79,7 @@ export default {
       }
       this.hasSend = true;
 
-      let result = await api.sendMsg({
-        mobile: this.form.mobile
-      });
+      let result = await api.sendMsg(this.form.mobile);
       if (result) {
         this.$dialog.toast({
           mes: "验证码已发送，请注意查收",

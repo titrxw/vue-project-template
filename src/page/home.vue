@@ -1,10 +1,9 @@
 <template>
   <div class="home">
-    
+    34
   </div>
 </template>
 <script>
-import api from '../api'
 export default {
   data () {
     return {

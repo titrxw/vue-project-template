@@ -4,23 +4,12 @@
   </div>
 </template>
 <script>
-import api from '../../api'
+import auth from '@/api/auth'
+import wechat from '@/libs/wechat'
 export default {
-  methods: {
-    // snsapi_base  snsapi_userinfo
-    async wechatAuth (scope = 'snsapi_base') {
-      let result = await api.wechatAuth({
-        scope: scope
-      })
-      if (result) {
-        window.location.href = result.url
-      }
-    }
-  },
   mounted: function () {
     if (this.$route.query.openid && this.$route.query.openid !== '') {
-      sessionStorage.setItem('openId', this.$route.query.openid)
-      sessionStorage.setItem('wechatAuth', true)
+      wechat.wechatAuthSuccess(this.$route.query.openid)
 
       let path = sessionStorage.getItem('redirect')
       path = path ? path : '/'
@@ -28,8 +17,8 @@ export default {
         path = '/login'
       }
       this.$router.push(path)
-    } else if (!sessionStorage.getItem('openId') || sessionStorage.getItem('openId') === '') {
-      this.wechatAuth()
+    } else if (!wechat.hasAuth()) {
+      auth.wechatAuth()
     } else {
       this.$router.push('/')
     }

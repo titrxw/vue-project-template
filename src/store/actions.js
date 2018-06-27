@@ -1,11 +1,12 @@
-import api from '../api'
+import api from '../api/auth'
 
 export const getUserInfo = ({
-  commit, state
+    commit,
+    state
 }) => {
-  if (JSON.stringify(state.userInfo) == "{}") {
-    api.userInfo().then(response => {
-      return commit('userInfo', response)
-    })
-  }
+    if (JSON.stringify(state.userInfo) == "{}") {
+        api.userInfo().then(response => {
+            return commit('userInfo', response)
+        })
+    }
 }
