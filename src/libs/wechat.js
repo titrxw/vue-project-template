@@ -7,7 +7,7 @@ export default class Wechat {
     }
     static getOpenId() {
         if (!this.openId) {
-            this.openId = storage.session.get('openid')
+            this.openId = storage.session.get('openId')
         }
         if (this.openId) {
             return this.openId
