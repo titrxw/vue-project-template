@@ -33,6 +33,6 @@ export default class Auth extends base {
         return result
     }
     static unLogin() {
-        this.G.token = null
+        user.unLogin()
     }
 }

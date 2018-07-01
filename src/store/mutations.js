@@ -1,3 +1,4 @@
+import storage from '@/libs/storage'
 const mutations = {
     updateStatus(state, val) {
         state.netStatus = val
@@ -6,11 +7,11 @@ const mutations = {
         state.msg = msg
     },
     updateUserType(state, type) {
-        sessionStorage.setItem('userType', type)
+        storage.session.set('userType', type)
         state.userType = type
     },
     userAuthStatus(state, status) {
-        sessionStorage.setItem('userAuthStatus', status)
+        storage.session.set('userAuthStatus', status)
         state.userAuthStatus = status
     },
     userInfo(state, data) {

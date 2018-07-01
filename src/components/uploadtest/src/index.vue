@@ -35,8 +35,9 @@
 
 <script>
 
-    require('../lrzall')
+require('../lrzall')
 import Upload from './upload'
+import user from '@/libs/user'
 import Progress from 'vue-multiple-progress'
   export default {
   components: {
@@ -131,7 +132,7 @@ import Progress from 'vue-multiple-progress'
     return {
       emit: false,
       uploadData: {
-        token: sessionStorage.getItem("token")
+        token: user.getToken()
       },
       uploadList: [],
       uidList: [],
