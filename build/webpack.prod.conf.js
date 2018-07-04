@@ -68,7 +68,7 @@ var webpackConfig = merge(baseWebpackConfig, {
       chunksSortMode: 'dependency'
     }),
     new webpack.optimize.CommonsChunkPlugin({
-        names: ["vendor4","vendor3","vendor2","vendor1"],
+        names: ["vendor4","vendor1"],
         minChunks: Infinity
     }),
     new webpack.optimize.CommonsChunkPlugin({

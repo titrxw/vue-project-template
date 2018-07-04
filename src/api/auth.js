@@ -1,6 +1,6 @@
 import base from './base'
-import wechat from '@/libs/wechat'
-import user from '@/libs/user'
+import wechat from '@/beans/wechat'
+import user from '@/beans/user'
 
 /**
  * 登录类

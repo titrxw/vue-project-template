@@ -10,8 +10,6 @@ function resolve (dir) {
 module.exports = {
   entry: {
     "vendor1": ["vue-lazyload"],
-    "vendor2": ["vue-qriously"],
-    "vendor3": ["vue-amap"],
     "vendor4": ["vue-ydui"],
     app: './src/main.js'
   },

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import store from '../store'
 import router from '../router'
-import user from '@/libs/user'
+import user from '@/beans/user'
 import qs from 'qs'
 // 配置
 axios.defaults.timeout = 50000

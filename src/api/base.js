@@ -3,8 +3,7 @@ import md5 from 'md5'
 export default class base {
     static single = {}
 
-
-    static async post(url, data, header = {}, isSingle = true) {
+    static apiReset (url, data, header = {}) {
         let key = url;
         if (isSingle) {
             if (data) {
@@ -22,6 +21,19 @@ export default class base {
             }
             this.single[key] = true
         }
+
+        return key
+    }
+
+    static async post(url, data, header = {}, isSingle = true) {
+        let key = ''
+        if (isSingle) {
+            key = this.apiReset(url, data, header)
+            if (!key) {
+                return false;
+            }
+        }
+        
 
         let result = await ajax.post(url, data, header)
         if (isSingle) {
@@ -29,24 +41,16 @@ export default class base {
         }
         return result
     }
+    
     static async get(url, data, header = {}, isSingle = true) {
-        let key = url;
+        let key = ''
         if (isSingle) {
-            if (data) {
-                if (typeof(data) == 'array' || typeof(data) == 'object')
-                    key += JSON.stringify(data)
-                else
-                    key += data
-            }
-            if (header != {}) {
-                key += JSON.stringify(header)
-            }
-            key = md5(key);
-            if (this.single[key] === true) {
+            key = this.apiReset(url, data, header)
+            if (!key) {
                 return false;
             }
-            this.single[key] = true
         }
+        
 
         let result = await ajax.get(url, data, header)
         if (isSingle) {

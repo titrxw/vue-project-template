@@ -5,8 +5,6 @@ import producationConf from './producation'
 
 
 if (Vue.ENV_PRODUCATION) {
-  // Vue.prototype.imgHost = 'http://1zuty.com/uploads/'
-  // Vue.prototype.uploadApiHost = 'http://1zuty.com/upload/kc/system/upload'
   Vue.prototype.imgHost = 'https://baidu.com/uploads/'
   Vue.prototype.uploadApiHost = 'https://baidu.com/upload/kc/system/upload'
   Vue.prototype.sysConstant = producationConf
