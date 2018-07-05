@@ -5,22 +5,20 @@ export default class base {
 
     static apiReset (url, data, header = {}) {
         let key = url;
-        if (isSingle) {
-            if (data) {
-                if (typeof(data) == 'array' || typeof(data) == 'object')
-                    key += JSON.stringify(data)
-                else
-                    key += data
-            }
-            if (header != {}) {
-                key += JSON.stringify(header)
-            }
-            key = md5(key);
-            if (this.single[key] === true) {
-                return false;
-            }
-            this.single[key] = true
+        if (data) {
+            if (typeof(data) == 'array' || typeof(data) == 'object')
+                key += JSON.stringify(data)
+            else
+                key += data
         }
+        if (header != {}) {
+            key += JSON.stringify(header)
+        }
+        key = md5(key);
+        if (this.single[key] === true) {
+            return false;
+        }
+        this.single[key] = true
 
         return key
     }

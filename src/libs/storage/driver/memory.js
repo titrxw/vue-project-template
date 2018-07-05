@@ -1,12 +1,20 @@
 export default class Memery {
-  static data = {}
-  static set (key, value) {
-    this.data[key] = value
+  data = {}
+  prefx = ''
+  constructor(prefx = '') {
+    this.data = {}
+    this.prefx = prefx
   }
-  static get (key) {
-    return this.data[key]
+  getKey (key) {
+    return this.prefx + '-' + key
   }
-  static delete(key) {
-    delete this.data[key]
+  set(key, value) {
+    this.data[this.getKey(key)] = value
+  }
+  get(key) {
+    return this.data[this.getKey(key)]
+  }
+  delete(key) {
+    delete this.data[this.getKey(key)]
   }
 }

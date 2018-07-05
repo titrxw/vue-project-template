@@ -21,14 +21,14 @@ router.beforeEach(function(to, from, next) {
     let token = user.getToken()
         // 检测微信授权
     if (Vue.ENV_PRODUCATION && to.meta.requireWechatAuth === true && !wechat.hasAuth()) {
-        storage.set('redirect', to.fullPath)
+        storage.session.set('redirect', to.fullPath)
         next({
             path: '/auth'
         })
     } else {
         // 账户绑定认证
         if (to.meta.requireLogin === true && !token) {
-            storage.set('redirect', to.fullPath)
+            storage.session.set('redirect', to.fullPath)
             next({
                 path: '/login'
             })

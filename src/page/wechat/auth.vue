@@ -12,8 +12,8 @@ export default {
     if (this.$route.query.openid && this.$route.query.openid !== '') {
       wechat.wechatAuthSuccess(this.$route.query.openid)
 
-      let path = storage.get('redirect')
-      storage.delete("redirect");
+      let path = storage.session.get('redirect')
+      storage.session.delete("redirect");
       path = path ? path : '/'
       if (this.$route.meta.requireLogin) {
         path = '/login'

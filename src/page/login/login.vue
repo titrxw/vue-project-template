@@ -44,8 +44,8 @@ export default {
     afterLogin(result) {
       // 保存token以及登录时间
       // 上一步路径
-      let path = storage.get("redirect");
-      storage.delete("redirect");
+      let path = storage.session.get("redirect");
+      storage.session.delete("redirect");
       path = path ? path : "/";
       this.$router.push(path);
     },
