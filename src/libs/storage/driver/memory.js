@@ -6,7 +6,7 @@ export default class Memery {
     this.prefx = prefx
   }
   getKey (key) {
-    return this.prefx + '-' + key
+    return this.prefx + key
   }
   set(key, value) {
     this.data[this.getKey(key)] = value
