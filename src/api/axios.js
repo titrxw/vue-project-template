@@ -11,7 +11,6 @@ axios.defaults.baseURL = Vue.ENV_PRODUCATION ? 'http://www.baidu.com/kc/' : 'kc'
 
 axios.interceptors.request.use(
     config => {
-        Vue.submit()
         let token = user.getToken()
         if (config.method === 'post') {
             if (!config.data) {
@@ -29,14 +28,12 @@ axios.interceptors.request.use(
         return config
     },
     error => {
-        Vue.cancelSubmit()
         store.commit('msg', '系统错误')
         return false
     }
 )
 axios.interceptors.response.use(
     response => {
-        Vue.cancelSubmit()
         if (typeof response.data == 'string') {
             store.commit('msg', '系统错误')
             return false
@@ -72,7 +69,6 @@ axios.interceptors.response.use(
         }
     },
     error => {
-        Vue.cancelSubmit()
         store.commit('msg', '系统错误')
         return false
     }
