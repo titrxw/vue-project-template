@@ -37,5 +37,33 @@ if (/Android/gi.test(navigator.userAgent)) {
 }
 
 
+/**
+ * 单次提交，点击后按钮变灰
+ */
+Vue.cancelSubmit = function () {
+  if (Vue.el) {
+    window.setTimeout(function () {
+      Vue.el.submit = false
+      Vue.el.setAttribute('class', Vue.elClass);
+    }, 500);
+  }
+}
+Vue.submit = function () {
+  if (Vue.el) {
+    Vue.el.setAttribute('class', ' yd-btn-disabled ' + Vue.elClass);
+  }
+}
+// 自定义指令  在标签上添加v-submit
+Vue.directive('submit', {
+  inserted(el, binding) {
+    Vue.el = el
+    Vue.elClass = el.getAttribute('class')
+  }
+})
+/**
+ * 单次提交 end
+ */
+
+
 
 
