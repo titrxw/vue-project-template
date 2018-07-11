@@ -16,7 +16,7 @@
             ></yd-sendcode>
       </yd-cell-item>
       <yd-button-group class="theme-margin-top">
-        <yd-button type="primary"  size="large" @click.native="doLogin">登录</yd-button>
+        <yd-button type="primary"  size="large" v-submit @click.native="doLogin">登录</yd-button>
       </yd-button-group>
       <div class="theme-padding user-protocol">
           <span class="text-gray font-size-12">首次登录将为您创建相寓太原账号，点击登录表示您同意</span>

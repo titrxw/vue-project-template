@@ -7,7 +7,7 @@ import qs from 'qs'
 // 配置
 axios.defaults.timeout = 50000
 axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
-axios.defaults.baseURL = Vue.ENV_PRODUCATION ? 'http://www.baidu.com/kc/' : 'kc'
+axios.defaults.baseURL = Vue.ENV_PRODUCATION ? 'http://api.zh5j.com/kc/' : 'kc'
 
 axios.interceptors.request.use(
   config => {

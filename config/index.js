@@ -31,7 +31,7 @@ module.exports = {
         // proxyTable: {},
         proxyTable: {
             '/kc': { //使用"/api"来代替"http://f.apiplus.c" 
-                target: 'http://www.baidu.com', //源地址 
+                target: 'http://api.zh5j.com', //源地址 
                 changeOrigin: true, //改变源 
                 pathRewrite: {
                     '^/kc': '/kc/' //路径重写 
