@@ -1,17 +1,24 @@
 import ajax from './axios'
-import Vue from 'vue'
 export default class base {
     static async post(url, data, header = {}) {
-        Vue.submit()
+        if (ajax.before) {
+            ajax.before()
+        }
         let result = await ajax.post(url, data, header)
-        Vue.unSubmit()
+        if (ajax.after) {
+            ajax.after()
+        }
         return result
     }
     
     static async get(url, data, header = {}) {
-        Vue.submit()
+        if (ajax.before) {
+            ajax.before()
+        }
         let result = await ajax.get(url, data, header)
-        Vue.unSubmit()
+        if (ajax.after) {
+            ajax.after()
+        }
         return result
     }
 }
