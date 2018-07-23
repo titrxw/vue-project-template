@@ -22,6 +22,7 @@ export default class User {
             this.token = storage.session.get('token')
         }
         if (this.token) {
+            storage.session.set('last_login_time', Date.parse(new Date()) / 1000)
             return this.token
         }
         return null
