@@ -11,6 +11,7 @@ export default class User {
     static unlogin() {
         this.token = null
         storage.session.delete('token')
+        storage.session.delete('last_login_time')
     }
     static getToken() {
         let lastTime = storage.session.get('last_login_time')
