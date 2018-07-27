@@ -18,7 +18,6 @@ router.beforeEach(function(to, from, next) {
         document.title = title
     }
 
-    let token = user.getToken()
         // 检测微信授权
     if (Vue.ENV_PRODUCATION && to.meta.requireWechatAuth === true && !wechat.hasAuth()) {
         storage.session.set('redirect', to.fullPath)
@@ -27,6 +26,7 @@ router.beforeEach(function(to, from, next) {
         })
     } else {
         // 账户绑定认证
+        let token = user.getToken()
         if (to.meta.requireLogin === true && !token) {
             storage.session.set('redirect', to.fullPath)
             next({
