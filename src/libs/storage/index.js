@@ -1,3 +1,7 @@
+/**
+ * 推荐使用store.js
+ */
+
 import Session from './driver/session'
 import Local from './driver/local'
 import Memory from './driver/memory'
