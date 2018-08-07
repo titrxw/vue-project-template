@@ -6,7 +6,6 @@ export default class User {
         this.token = result.token
         storage.session.set('token', result.token)
         storage.session.set('last_login_time', Date.parse(new Date()) / 1000)
-        store.commit("userAuthStatus", result.approveStatus);
     }
     static unlogin() {
         this.token = null

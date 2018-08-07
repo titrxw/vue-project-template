@@ -39,7 +39,6 @@ if (/Android/gi.test(navigator.userAgent)) {
 
 // 点击后等待请求完成才可以再点击  利用自定义指令实现        使用时需要在标签上添加v-submit    现在限于button
 Vue.submit = function () {
-  console.log(Vue.el)
   if (Vue.el) {
     Vue.el.setAttribute('class', 'yd-btn-disabled ' + Vue.elClass)
   }
