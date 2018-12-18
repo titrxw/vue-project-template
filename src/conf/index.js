@@ -7,11 +7,13 @@ if (Vue.ENV_PRODUCATION) {
     Vue.prototype.imgHost = 'https://baidu.com/uploads/'
     Vue.prototype.uploadApiHost = 'https://baidu.com/upload/kc/system/upload'
     Vue.prototype.sysConstant = producationConf
+    Vue.apiHost = 'https://baidu.com/api'
 } else {
     Vue.prototype.imgHost = 'https://baidu.com/uploads/'
     Vue.prototype.uploadApiHost = 'https://baidu.com/upload/kc/system/upload'
     sessionStorage.setItem('openId', 'oxrQJ1OvL8uk3lzvjtZE9PyzC07U')
     Vue.prototype.sysConstant = devConf
+    Vue.apiHost = 'https://baidu.com/api'
 }
 
 
