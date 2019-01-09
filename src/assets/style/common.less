@@ -1,78 +1,17 @@
 @import './conf.less';
-@import './ydui-reset.less';
 @import './border.less';
-// @import './reset.css';
-// ydui 中带有reset css
-
-
-.send-msg .yd-btn-warning {
-    background: #fff;
-    color: @theme-color;
-}
-.send-msg .yd-btn-disabled{
-    background: #fff;
-    color:#666;
-}
-.swiper-lazy-preloader-white::after {
-    background-image: url('../images/load.gif') !important;
-}
-
 
 *{
   font-family: @theme-font-family;
 }
 body{
-    font-size: 12px;
-    background: #f5f5f5;
+    background-color: @body-background-color;
 }
 button, input, select, textarea {
     font: 100% tahoma,@theme-font-family,arial;
 }
-img{
-    border:none;
-}
-.font-size-12{
-    font-size: 12px;
-}
-.theme-padding{
-    padding: @theme-padding;
-}
-.theme-padding-top{
-    padding-top: @theme-padding;
-}
-.theme-padding-left{
-    padding-left: @theme-padding;
-}
-.theme-padding-right{
-    padding-right: @theme-padding;
-}
-.padding-top-0{
-    padding-top: 0;
-}
 .padding-right-0{
     padding-right: 0px;
-}
-.padding-bottom-0{
-    padding-bottom: 0px;
-}
-.theme-margin{
-    margin: @theme-padding;
-}
-.theme-padding-bottom{
-    padding-bottom: @theme-padding;
-}
-.theme-margin-bottom{
-    margin-bottom: @theme-padding;
-}
-.theme-margin-top{
-    margin-top: @theme-padding;
-}
-.margin-bottom-0{
-    margin-bottom: 0px;
-}
-.text-btn{
-    &:extend(.theme-color-text);
-    font-size: @btn-font-size;
 }
 .theme-color-text{
     color: @theme-color;
@@ -81,144 +20,26 @@ img{
     color: @text-gray;
 }
 .text-black{
-    color:#000;
+    color: #000;
 }
-.font-size-20{
-    font-size: 20px;
+.theme-padding{
+    padding: @theme-padding;
 }
-.font-size-17{
-    font-size: 17px;
+.theme-padding-top{
+    padding-top:@theme-padding;
 }
-.sub-font-size{
-    font-size: @gray-font-size;
+.theme-padding-bottom{
+    padding-bottom: @theme-padding;
 }
-.name-font-size{
-    font-size: .3rem;
+.theme-padding-left{
+    padding-left: @theme-padding;
+}
+.theme-margin-bottom{
+    margin-bottom:@theme-padding;
+}
+.theme-margin-top{
+    margin-top: @theme-padding;
 }
 .text-center{
     text-align:center;
-}
-.text-right{
-    text-align:right;
-    input[type=text]{
-        text-align:right;
-    }
-}
-.background-fff{
-    background: #fff;
-}
-.auto-break-line{
-    word-wrap: break-word;
-}
-.border-bottom{
-    content: "";
-}
-.border-bottom:after{
-    content: "";
-    width: 100%;
-    display: block;
-    border-bottom: 1px solid @common-border-color;
-    -webkit-transform: scaleY(.7);
-    transform: scaleY(.7);
-    -webkit-transform-origin: 0 0;
-    transform-origin: 0 0;
-}
-.border-top{
-    content: "";
-}
-.border-top:before{
-    content: "";
-    width: 100%;
-    display: block;
-    border-top: 1px solid @common-border-color;
-    -webkit-transform: scaleY(.7);
-    transform: scaleY(.7);
-    -webkit-transform-origin: 0 0;
-    transform-origin: 0 0;
-}
-.text-over-ellipsis{
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-}
-.lazy-load-box{
-    height:100%;
-    width: 100%;
-    text-align: center;
-    display: flex;
-    align-items: center;
-}
-img[lazy=loaded] {
-    /*your style here*/
-    width:100%;
-    height:100%;
-    display: block;
-}
-img[lazy=loading] {
-    /*your style here*/
-    width: 40px;
-    margin:0 auto;
-}
-img[lazy=error] {
-    width: 100%;
-    height: 100%;
-    padding: .12rem;
-    margin: 0 auto;
-    max-width: 180px;
-    max-height: 115px;
-}
-
-
-
-
-
-
-
-
-
-
-.tab-home .yd-cell-item:not(:last-child):after, .tab-else .yd-cell-item:not(:last-child):after{
-    border-bottom: none;
-}
-.style .yd-cell-item:not(:last-child):after, .tab-else .yd-cell-item:not(:last-child):after{
-    border-bottom: none;
-}
-.user-center .operate-box .yd-cell-item:not(:last-child):after {
-    border-bottom: none;
-}
-.user-center .yd-grids-item{
-    padding: 0 0 0 0;
-}
-.user-center .yd-grids-txt{
-    font-size: @gray-font-size;
-}
-.hairline .yd-scrollview {
-    margin-top: 0px;
-}
-.bills .yd-weui-cell {
-    padding: 5px 15px;
-}
-.success-page{
-    height: 100%;
-    background: #fff;
-    padding-top: .48rem; 
-}
-.house-list .yd-scrolltab {
-    position: static; 
-}
-.cell-middle-text{
-    line-height: 1rem;
-    margin-left:.24rem;
-}
-.button-box{
-padding: @theme-padding/2;
-.yd-flexbox-item{
-    margin: .12rem;
-}  
-}
-.full-slider .yd-slider-pagination{
-    bottom:.5rem;
-}
-.lock .yd-slider-pagination-item-active {
-    background-color: rgb(255,180,76);
 }

@@ -1,14 +1,8 @@
 <template>
+<div>
     <img src='../assets/images/404.png'>
+</div>
 </template>
-<script>
-export default {
-  mounted: function () {
-    this.$store.commit('updateStatus',true)
-  }
-}
-</script>
-
 <style lang="less" scoped>
 img {
   width:270px;

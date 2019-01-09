@@ -1,46 +1,45 @@
 import Vue from 'vue'
-import Router from 'vue-router'
 import RouterConf from './router.js'
-import wechat from '@/beans/wechat'
-import user from '@/beans/user'
-import storage from '@/libs/storage'
+import Router from 'vue-router'
 
 Vue.use(Router)
 
-const router = new Router({
+let router = new Router({
   routes: RouterConf
 })
 
 router.beforeEach(function (to, from, next) {
+
   let title = ''
   if (to.meta.title && to.meta.title !== '') {
     title = to.meta.title
     document.title = title
   }
 
-  // 检测微信授权
-  if (Vue.ENV_PRODUCATION && to.meta.requireWechatAuth === true && !wechat.hasAuth()) {
-    storage.session.set('redirect', to.fullPath)
+
+  let lastTime = sessionStorage.getItem('last_login_time')
+  let curTime = Date.parse(new Date()) / 1000;
+  if (lastTime && (curTime - lastTime) > (Vue.onlineHour * 60 * 55)) {
+    sessionStorage.removeItem('token')
+  }
+
+
+  let token = sessionStorage.getItem('token')
+
+  if (to.meta.requireLogin === true && !token) {
+    sessionStorage.setItem('redirect', to.fullPath)
     next({
-      path: '/auth'
+      path: '/login'
     })
   } else {
-    // 账户绑定认证
-    let token = user.getToken()
-    if (to.meta.requireLogin === true && !token) {
-      storage.session.set('redirect', to.fullPath)
+    if ((to.path === '/login' || to.name === 'Login') && token) {
       next({
-        path: '/login'
+        path: '/'
       })
     } else {
-      if ((to.path === '/login' || to.name === 'Login') && token) {
-        next({
-          path: '/'
-        })
-      } else {
-        next()
-      }
+      next()
     }
   }
 })
+
 export default router

@@ -1,6 +1,7 @@
-export default {
-    msg: '',
-    netStatus: '',
-    userAuthStatus: '',
-    userInfo: ''
+const state = {
+  netStatus: '',
+  msg: '',
+  error: ''
 }
+
+export default state
