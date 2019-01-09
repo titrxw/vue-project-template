@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import RouterConf from './router.js'
 import Router from 'vue-router'
+import login from './login'
+import wechat from './wechat'
 
 Vue.use(Router)
 
@@ -16,27 +18,8 @@ router.beforeEach(function (to, from, next) {
     document.title = title
   }
 
-
-  let lastTime = sessionStorage.getItem('last_login_time')
-  let curTime = Date.parse(new Date()) / 1000;
-  if (lastTime && (curTime - lastTime) > (Vue.onlineHour * 60 * 55)) {
-    sessionStorage.removeItem('token')
-  }
-
-
-  let token = sessionStorage.getItem('token')
-
-  if (to.meta.requireLogin === true && !token) {
-    sessionStorage.setItem('redirect', to.fullPath)
-    next({
-      path: '/login'
-    })
-  } else {
-    if ((to.path === '/login' || to.name === 'Login') && token) {
-      next({
-        path: '/'
-      })
-    } else {
+  if (!wechat(to, from, next)) {
+    if (!login(to, from, next)) {
       next()
     }
   }
