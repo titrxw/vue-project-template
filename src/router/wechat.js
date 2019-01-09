@@ -5,8 +5,8 @@ export default {
       next({
         path: '/wechatAuth'
       })
-      return true;
+      return false;
     }
-    return false;
+    return true;
   }
 }

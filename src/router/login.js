@@ -15,15 +15,15 @@ export default {
       next({
         path: '/login'
       })
-      return true
+      return false
     } else {
       if ((to.path === '/login' || to.name === 'Login') && token) {
         next({
           path: '/'
         })
-        return true
+        return false
       }
     }
-    return false;
+    return true;
   }
 }
