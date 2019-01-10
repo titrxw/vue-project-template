@@ -18,8 +18,8 @@ router.beforeEach(function (to, from, next) {
     document.title = title
   }
 
-  if (wechat.validate(to, from, next)) {
-    if (login.validate(to, from, next)) {
+  if (wechat(to, from, next)) {
+    if (login(to, from, next)) {
       next()
     }
   }
