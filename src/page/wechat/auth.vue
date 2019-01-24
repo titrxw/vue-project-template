@@ -4,17 +4,17 @@
 </div>
 </template>
 <script>
-import api from '../../api'
+import api from '@/api'
 export default {
   methods: {
     async doLogin () {
       let result = await api.login()
       if (!result) return false
 
-      sessionStorage.setItem('token', result.token)
-      sessionStorage.setItem('last_login_time', Date.parse(new Date()) / 1000);
+      this.$storage.set('token', result.token)
+      this.$storage.set('last_login_time', Date.parse(new Date()) / 1000);
       
-      let path = sessionStorage.getItem('redirect')
+      let path = this.$storage.get('redirect')
       path = path ? path : '/'
       this.$router.push({path: path})
     },
@@ -31,20 +31,20 @@ export default {
   watch : {
     '$route.query' (val) {
       if (val.openid && val.openid !== '') {
-        sessionStorage.setItem('openId', val.openid)
-        sessionStorage.setItem('unionId', val.unionid)
-        sessionStorage.setItem('wechatAuth', true)
+        this.$storage.set('openId', val.openid)
+        this.$storage.set('unionId', val.unionid)
+        this.$storage.set('wechatAuth', true)
         this.doLogin()
       }
     }
   },
   mounted: function () {
     if (this.$route.query.openid && this.$route.query.openid !== '') {
-      sessionStorage.setItem('openId', this.$route.query.openid)
-      sessionStorage.setItem('unionId', this.$route.query.unionid)
-      sessionStorage.setItem('wechatAuth', true)
+      this.$storage.set('openId', this.$route.query.openid)
+      this.$storage.set('unionId', this.$route.query.unionid)
+      this.$storage.set('wechatAuth', true)
       this.doLogin()
-    } else if (!sessionStorage.getItem('openId') || sessionStorage.getItem('openId') === '') {
+    } else if (!this.$storage.get('openId') || this.$storage.get('openId') === '') {
       this.wechatAuth('snsapi_userinfo')
     }
   }
