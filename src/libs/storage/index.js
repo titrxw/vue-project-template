@@ -1,10 +1,8 @@
 /**
  * 推荐使用store.js
  */
-
 import Session from './driver/session'
 import Local from './driver/local'
-import Memory from './driver/memory'
 class Storage {
   static default
   static session
@@ -35,7 +33,7 @@ class Storage {
     if (Storage.default) {
       return Storage.default
     }
-    Storage.default = new Memory(this.prefx)
+    Storage.default = new Session(this.prefx)
     return Storage.default
   }
 
@@ -52,6 +50,7 @@ class Storage {
 
 export default {
   install: function (Vue) {
-    Vue.prototype.storage = new Storage('c')
+    Vue.storage = new Storage('c')
+    Vue.prototype.storage = Vue.storage
   }
 }

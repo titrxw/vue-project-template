@@ -1,16 +1,16 @@
 import Vue from 'vue'
 export default function (to, from, next) {
-  let lastTime = sessionStorage.getItem('last_login_time')
+  let lastTime = Vue.storage.get('last_login_time')
   let curTime = Date.parse(new Date()) / 1000;
   if (lastTime && (curTime - lastTime) > (Vue.onlineHour * 60 * 55)) {
-    sessionStorage.removeItem('token')
+    Vue.storage.delete('token')
   }
 
 
-  let token = sessionStorage.getItem('token')
+  let token = Vue.storage.get('token')
 
   if (to.meta.requireLogin === true && !token) {
-    sessionStorage.setItem('redirect', to.fullPath)
+    Vue.storage.set('redirect', to.fullPath)
     next({
       path: '/login'
     })

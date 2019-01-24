@@ -3,12 +3,17 @@ import './conf'
 import error from './libs/error'
 import api from './api'
 import store from './store'
+import storage from './libs/storage'
 import router from './router'
 import './assets/style/common.less'
 import App from './App'
 
 Vue.use(error);
 Vue.use(api);
+Vue.use(storage)
+
+
+
 
 Vue.beforeRequest = function () {
   Vue.hasSubmit = true

@@ -1,6 +1,7 @@
+import Vue from 'vue'
 export default function (to, from, next) {
-  if (process.env.NODE_ENV === 'production' && to.meta.requireWechatAuth === true && sessionStorage.getItem('wechatAuth') != 'true') {
-    sessionStorage.setItem('redirect', to.fullPath)
+  if (process.env.NODE_ENV === 'production' && to.meta.requireWechatAuth === true && Vue.storage.get('wechatAuth') != 'true') {
+    Vue.storage.set('redirect', to.fullPath)
     next({
       path: '/wechatAuth'
     })

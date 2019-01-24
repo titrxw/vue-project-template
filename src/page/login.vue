@@ -24,7 +24,7 @@ export default {
       form: {
         mobile: '',
         password: '',
-        unionid: sessionStorage.getItem('unionId')
+        unionid: this.$storage.get('unionId')
       }
     }
   },
@@ -42,8 +42,8 @@ export default {
       }
       let result = await this.$api.bind(this.form)
       if (result) {
-        sessionStorage.setItem('token', result.token);
-        sessionStorage.setItem('last_login_time', Date.parse(new Date()) / 1000);
+        this.$storage.set('token', result.token);
+        this.$storage.set('last_login_time', Date.parse(new Date()) / 1000);
         this.$store.dispatch('reset')
         this.$router.push({path: '/'});
       }

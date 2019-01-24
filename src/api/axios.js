@@ -34,7 +34,7 @@ axios.get = async (url, data, header = {}) => {
 
 axios.interceptors.request.use(
   config => {
-    let token = sessionStorage.getItem('token')
+    let token = Vue.storage.get('token')
     if (config.method === 'post') {
       if (!config.data) {
         config.data = {};
@@ -71,7 +71,7 @@ axios.interceptors.response.use(
         return false
       case 401:
         // 登录超时
-        sessionStorage.removeItem('token')
+        Vue.storage.delete('token')
         router.replace({
           path: '/login'
         })
