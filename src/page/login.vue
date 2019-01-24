@@ -44,6 +44,7 @@ export default {
       if (result) {
         sessionStorage.setItem('token', result.token);
         sessionStorage.setItem('last_login_time', Date.parse(new Date()) / 1000);
+        this.$store.dispatch('reset')
         this.$router.push({path: '/'});
       }
     }
