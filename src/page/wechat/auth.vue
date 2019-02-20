@@ -4,11 +4,10 @@
 </div>
 </template>
 <script>
-import api from '@/api'
 export default {
   methods: {
     async doLogin () {
-      let result = await api.login()
+      let result = await this.$api.login()
       if (!result) return false
 
       this.$storage.set('token', result.token)
@@ -20,7 +19,7 @@ export default {
     },
     // snsapi_base  snsapi_userinfo
     async wechatAuth (scope = 'snsapi_base') {
-      let result = await api.wechatAuth({
+      let result = await this.$api.wechatAuth({
         scope: scope
       })
       if (result) {
@@ -50,7 +49,7 @@ export default {
   }
 }
 </script>
-<style scoped lang="less">
+<style scoped>
 img{
   width: 160px;
   margin:0 auto;
