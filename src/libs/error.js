@@ -1,9 +1,11 @@
+import Vue from 'vue'
 import ajax from '../api/axios'
+
 var logs = []
 const errorHandler = (error, vm) => {
     console.error(error)
     console.error(vm)
-    if (process.env.NODE_ENV === 'production') {
+    if (process.env.NODE_ENV === 'production' && Vue.errorReport.open) {
         let log = {
             data: vm._data,
             route: vm.$route.fullPath,
@@ -14,7 +16,7 @@ const errorHandler = (error, vm) => {
         }
         if (logs.length == 0) {
             setTimeout(function() {
-                ajax.post('common/frontLog', {
+                ajax.post(Vue.errorReport.url, {
                     logs
                 })
                 logs = []
