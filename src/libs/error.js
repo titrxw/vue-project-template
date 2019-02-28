@@ -29,6 +29,9 @@ const errorHandler = (error, vm) => {
 export default {
     install: function(Vue) {
         Vue.config.errorHandler = errorHandler;
+        /**
+         * 下面的是用在异步的try上  应为异步的执行是在浏览器专门的线程执行，只是回调在主线程执行，也就是异步的过程无法try catch
+         */
         Vue.prototype.$throw = function(error) {
             return errorHandler(error, this);
         };
