@@ -5,8 +5,8 @@ import router from '../router'
 // 配置
 axios.defaults.timeout = 50000
 axios.defaults.baseURL = Vue.apiHost
-var throttle = {}
 
+axios._cancelQueue = []
 axios.tpost = axios.post
 axios.tget = axios.get
 
@@ -34,24 +34,27 @@ axios.get = async (url, data, header = {}) => {
   return result
 }
 
+
+
 let pending = []; //声明一个数组用于存储每个ajax请求的取消函数和ajax标识
 let cancelToken = axios.CancelToken;
 let removePending = (ever) => {
   for(let p in pending){
-    if(pending[p].u === ever.url + '&' + ever.method + '&' + ever.data) { //当当前请求在数组中存在时执行函数体
-      pending[p].f('client cancel'); //执行取消操作  取消的是前面的请求
+    if(pending[p].url === ever.url + '&' + ever.method + '&' + ever.data) { //当当前请求在数组中存在时执行函数体
+      pending[p].cancel(); //执行取消操作  取消的是前面的请求
+      let index= axios._cancelQueue.indexOf(pending[p].cancel)
+      if (index >= 0) {
+        axios._cancelQueue.splice(index,1)
+      }
       pending.splice(p, 1); //把这条记录从数组中移除
     }
   }
 }
 
+
+
 axios.interceptors.request.use(
   config => {
-    removePending(config); //在一个ajax发送前执行一下取消操作
-    config.cancelToken = new cancelToken((c)=>{
-        // 这里的ajax标识我是用请求地址&请求方式拼接的字符串，当然你可以选择其他的一些方式
-        pending.push({ u: config.url + '&' + config.method + '&' + config.data, f: c });  
-    });
     let token = Vue.storage.get('token')
     if (config.method === 'post') {
       if (!config.data) {
@@ -65,6 +68,16 @@ axios.interceptors.request.use(
         config.params['token'] = token
       }
     }
+
+
+    removePending(config); //在一个ajax发送前执行一下取消操作
+    config.cancelToken = new cancelToken((c)=>{
+      axios._cancelQueue.push(c)
+      // 这里的ajax标识我是用请求地址&请求方式拼接的字符串，当然你可以选择其他的一些方式
+      pending.push({ url: config.baseURL + '/' + config.url + '&' + config.method + '&' + JSON.stringify(config.data), cancel: c });  
+    });
+
+
     return config
   },
   error => {
@@ -115,10 +128,10 @@ axios.interceptors.response.use(
     }
   },
   error => {
-    console.log(error)
-    if (error.message == 'client cancel') {
+    if (axios.isCancel(error)) {
       return false
     }
+    
     store.commit('error', error.message)
     store.commit('netStatus', false)
     return false
