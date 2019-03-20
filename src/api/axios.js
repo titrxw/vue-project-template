@@ -5,7 +5,7 @@ import router from '../router'
 // 配置
 axios.defaults.timeout = 50000
 axios.defaults.baseURL = Vue.apiHost
-
+var throttle = {}
 
 axios.tpost = axios.post
 axios.tget = axios.get
@@ -14,7 +14,18 @@ axios.post = async (url, data, header = {}) => {
   if (Vue.beforeRequest) {
     Vue.beforeRequest()
   }
+  
+  // 防止重复提交 暂时这样处理
+  let flag = JSON.stringify(arguments)
+  if (throttle[flag]) {
+    return false;
+  }
+  throttle[flag] = true
   let result = await axios.tpost(url, data, header)
+  let throttleTime = setTimeout(function () {
+    delete throttle[flag]
+    clearTimeout(throttleTime)
+  }, 1000)
   if (Vue.afterRequest) {
     Vue.afterRequest(result)
   }
@@ -24,8 +35,19 @@ axios.post = async (url, data, header = {}) => {
 axios.get = async (url, data, header = {}) => {
   if (Vue.beforeRequest) {
     Vue.beforeRequest()
+  }  
+  
+  // 防止重复提交 暂时这样处理
+  let flag = JSON.stringify(arguments)
+  if (throttle[flag]) {
+    return false;
   }
+  throttle[flag] = true
   let result = await axios.tget(url, data, header)
+  let throttleTime = setTimeout(function () {
+    delete throttle[flag]
+    clearTimeout(throttleTime)
+  }, 1000)
   if (Vue.afterRequest) {
     Vue.afterRequest(result)
   }
