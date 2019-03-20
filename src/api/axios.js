@@ -15,17 +15,7 @@ axios.post = async (url, data, header = {}) => {
     Vue.beforeRequest()
   }
   
-  // 防止重复提交 暂时这样处理
-  let flag = JSON.stringify(arguments)
-  if (throttle[flag]) {
-    return false;
-  }
-  throttle[flag] = true
   let result = await axios.tpost(url, data, header)
-  let throttleTime = setTimeout(function () {
-    delete throttle[flag]
-    clearTimeout(throttleTime)
-  }, 1000)
   if (Vue.afterRequest) {
     Vue.afterRequest(result)
   }
@@ -37,25 +27,31 @@ axios.get = async (url, data, header = {}) => {
     Vue.beforeRequest()
   }  
   
-  // 防止重复提交 暂时这样处理
-  let flag = JSON.stringify(arguments)
-  if (throttle[flag]) {
-    return false;
-  }
-  throttle[flag] = true
   let result = await axios.tget(url, data, header)
-  let throttleTime = setTimeout(function () {
-    delete throttle[flag]
-    clearTimeout(throttleTime)
-  }, 1000)
   if (Vue.afterRequest) {
     Vue.afterRequest(result)
   }
   return result
 }
 
+let pending = []; //声明一个数组用于存储每个ajax请求的取消函数和ajax标识
+let cancelToken = axios.CancelToken;
+let removePending = (ever) => {
+  for(let p in pending){
+    if(pending[p].u === ever.url + '&' + ever.method + '&' + ever.data) { //当当前请求在数组中存在时执行函数体
+      pending[p].f('client cancel'); //执行取消操作  取消的是前面的请求
+      pending.splice(p, 1); //把这条记录从数组中移除
+    }
+  }
+}
+
 axios.interceptors.request.use(
   config => {
+    removePending(config); //在一个ajax发送前执行一下取消操作
+    config.cancelToken = new cancelToken((c)=>{
+        // 这里的ajax标识我是用请求地址&请求方式拼接的字符串，当然你可以选择其他的一些方式
+        pending.push({ u: config.url + '&' + config.method + '&' + config.data, f: c });  
+    });
     let token = Vue.storage.get('token')
     if (config.method === 'post') {
       if (!config.data) {
@@ -77,6 +73,8 @@ axios.interceptors.request.use(
 )
 axios.interceptors.response.use(
   response => {
+    // 也可以延时删除
+    removePending(response.config);  //在一个ajax响应后再执行一下取消操作，把已经完成的请求从pending中移除
     if (typeof response.data == 'string') {
       store.commit('error', '数据格式错误' + response.data)
       return false
@@ -113,6 +111,10 @@ axios.interceptors.response.use(
     }
   },
   error => {
+    console.log(error)
+    if (error.message == 'client cancel') {
+      return false
+    }
     store.commit('error', error.message)
     store.commit('netStatus', false)
     return false
