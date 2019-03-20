@@ -40,7 +40,7 @@ let pending = []; //声明一个数组用于存储每个ajax请求的取消函�
 let cancelToken = axios.CancelToken;
 let removePending = (ever) => {
   for(let p in pending){
-    if(pending[p].url === ever.url + '&' + ever.method + '&' + ever.data) { //当当前请求在数组中存在时执行函数体
+    if(pending[p].url === ever.url + '&' + ever.method) { //当当前请求在数组中存在时执行函数体
       pending[p].cancel(); //执行取消操作  取消的是前面的请求
       let index= axios._cancelQueue.indexOf(pending[p].cancel)
       if (index >= 0) {
@@ -55,6 +55,14 @@ let removePending = (ever) => {
 
 axios.interceptors.request.use(
   config => {
+    removePending(config); //在一个ajax发送前执行一下取消操作
+    config.cancelToken = new cancelToken((c)=>{
+      axios._cancelQueue.push(c)
+      // 这里的ajax标识我是用请求地址&请求方式拼接的字符串，当然你可以选择其他的一些方式
+      pending.push({ url: config.baseURL + '/' + config.url + '&' + config.method, cancel: c });  
+    });
+
+    
     let token = Vue.storage.get('token')
     if (config.method === 'post') {
       if (!config.data) {
@@ -68,16 +76,6 @@ axios.interceptors.request.use(
         config.params['token'] = token
       }
     }
-
-
-    removePending(config); //在一个ajax发送前执行一下取消操作
-    config.cancelToken = new cancelToken((c)=>{
-      axios._cancelQueue.push(c)
-      // 这里的ajax标识我是用请求地址&请求方式拼接的字符串，当然你可以选择其他的一些方式
-      pending.push({ url: config.baseURL + '/' + config.url + '&' + config.method + '&' + JSON.stringify(config.data), cancel: c });  
-    });
-
-
     return config
   },
   error => {
