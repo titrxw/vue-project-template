@@ -74,7 +74,11 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   response => {
     // 也可以延时删除
-    removePending(response.config);  //在一个ajax响应后再执行一下取消操作，把已经完成的请求从pending中移除
+    let timer = setTimeout(() => {
+      removePending(response.config);  //在一个ajax响应后再执行一下取消操作，把已经完成的请求从pending中移除
+      clearTimeout(timer)
+    },600)
+    
     if (typeof response.data == 'string') {
       store.commit('error', '数据格式错误' + response.data)
       return false
