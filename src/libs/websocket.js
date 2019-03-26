@@ -35,7 +35,9 @@ export default class MyWebSocket {
         this._pingHandle = setInterval(() => {
             this.send('ping')
             this._pongHandle = setTimeout(() => {
-                wx.closeSocket()
+                this._handle.close({
+                    reason: 'abnormal'
+                })
             }, 5000)
         }, this._heartBeatInterval)
     }
