@@ -6,17 +6,26 @@ export default class MyWebSocket {
     _onClose = null;
     _onMessage = null;
     _handle = null;
-    _tryNum = 3;
+    _tryNum = 0;
     _hasTryNum = 0;
     _isHeartBeat = true;
+    _heartBeatInterval = 25000;
     _pongHandle = null
     _pingHandle = null;
-
+    _reconnectInterval = 600;
 
 
     constructor(tryNum = 3, heartBeat = true) {
         this._tryNum = tryNum
         this._isHeartBeat = heartBeat
+    }
+
+    setHeartBeatInterval(interval) {
+        this._heartBeatInterval = interval
+    }
+
+    setReconnectInterval(interval) {
+        this._reconnectInterval = interval
     }
 
     startHeartbeat() {
@@ -28,7 +37,7 @@ export default class MyWebSocket {
             this._pongHandle = setTimeout(() => {
                 wx.closeSocket()
             }, 5000)
-        }, 15000)
+        }, this._heartBeatInterval)
     }
 
     stopHeartbeat() {
@@ -77,7 +86,6 @@ export default class MyWebSocket {
         };
         //与WebSocket建立连接
         this._handle.onopen = (event) => {
-            this._handle = true
             this._hasTryNum = 0
             this.startHeartbeat()
             this._onConnect && this._onConnect(event);
@@ -88,7 +96,7 @@ export default class MyWebSocket {
             this._onMessage && this._onMessage(event.data);
         };
         this._handle.onclose = (event) => {
-            this._handle = false
+            this._handle = null
             this.stopHeartbeat()
             if (event.reason != 'client-close') {
                 if (this._tryNum <= 0) {
@@ -119,14 +127,18 @@ export default class MyWebSocket {
     }
 
     reConnect() {
-        if (this._hasTryNum == this._tryNum) {
-            this._onClose && this._onClose({
-                reason: 'abnormal'
-            });
-            return false
-        }
+        let reconTimer = setTimeout(() => {
+            if (this._hasTryNum == this._tryNum) {
+                this._onClose && this._onClose({
+                    reason: 'abnormal'
+                });
+                return false
+            }
 
-        ++this._hasTryNum
-        this.connect(this.host)
+            ++this._hasTryNum
+            this.connect(this.host)
+
+            clearTimeout(reconTimer)
+        }, this._reconnectInterval)
     }
 }
