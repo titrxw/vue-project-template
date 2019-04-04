@@ -37,11 +37,11 @@ class Storage {
     return Storage.default
   }
 
-  set (key, value) {
-    this.default.set(key, value)
+  set (key, value, expire = 0) {
+    this.default.set(key, value, expire)
   }
-  get (key) {
-    return this.default.get(key)
+  get (key, _default) {
+    return this.default.get(key, _default)
   }
   rm(key) {
     this.default.rm(key)
@@ -50,7 +50,7 @@ class Storage {
 
 export default {
   install: function (Vue) {
-    Vue.storage = new Storage('c')
-    Vue.prototype.storage = Vue.storage
+    Vue.storage = new Storage('')
+    Vue.prototype.$storage = Vue.storage
   }
 }

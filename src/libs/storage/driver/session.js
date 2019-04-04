@@ -5,11 +5,10 @@ export default class Session extends Memory {
       return false;
     }
     super.set(key, value)
-    key = super.getKey(key)
     if (typeof value == 'object' || typeof value == 'array') {
       value = JSON.stringify(value)
     }
-    sessionStorage.setItem(key, value)
+    sessionStorage.setItem(super.getKey(key), value)
     if (expire > 0) {
       this.set(key +'-expire', {
         cur: new Date().valueOf(),
@@ -20,7 +19,7 @@ export default class Session extends Memory {
   get(key, _default) {
     let expire = null
     try{
-      expire = JSON.parse(sessionStorage.getItem(super.getKey(key) +'-expire'))
+      expire = JSON.parse(sessionStorage.getItem(super.getKey(key +'-expire')))
     } catch (e) {
       expire = null
     }
@@ -34,13 +33,14 @@ export default class Session extends Memory {
 
     let value = super.get(key)
     if (!value) {
+      let tmp = sessionStorage.getItem(super.getKey(key))
       try {
-        value = JSON.parse(sessionStorage.getItem(super.getKey(key)))
+        value = JSON.parse(tmp)
       } catch (e) {
-        value = _default
+        value = tmp
       }
       if (!value) {
-        data = _default
+        value = _default
       }
       super.set(key, value)
     }
@@ -50,6 +50,6 @@ export default class Session extends Memory {
   rm(key) {
     super.rm(key)
     sessionStorage.removeItem(super.getKey(key))
-    sessionStorage.removeItem(super.getKey(key) +'-expire')
+    sessionStorage.removeItem(super.getKey(key +'-expire'))
   }
 }
