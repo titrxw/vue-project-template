@@ -29,13 +29,23 @@ Vue.directive('submit', {
     bind(el, binding, vnode) {
         function clickHandler(e) {
             // 这里判断点击的元素是否是本身，是本身，则返回
-            if (Vue.hasSubmit && el.contains(e.target)) {
+            // 点击时间间隔
+            if (el.contains(e.target) && (e.timeStamp - e.srcElement.timeStamp <= 600)) {
+                e.srcElement.timeStamp = e.timeStamp
                 return false;
             }
+            e.srcElement.timeStamp = e.timeStamp
+            
             // 判断指令中是否绑定了函数
             if (binding.expression) {
-                // 如果绑定了函数 则调用那个函数，此处binding.value就是handleClose方法
-                binding.value(e);
+                let arg = []
+                if (binding.arg) {
+                    arg = binding.arg.split(',')
+                }
+                if (e.target.dataset.args) {
+                    arg.push(e.target.dataset.args)
+                }
+                binding.value(e,...arg);
             }
         }
         // 给当前元素绑定个私有变量，方便在unbind中可以解除事件监听
