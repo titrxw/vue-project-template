@@ -9,12 +9,15 @@ export default class Memery {
     return this.prefx + key
   }
   set(key, value) {
+    if (!value) {
+      return false;
+    }
     this.data[this.getKey(key)] = value
   }
   get(key) {
     return this.data[this.getKey(key)]
   }
-  delete(key) {
+  rm(key) {
     delete this.data[this.getKey(key)]
   }
 }

@@ -4,9 +4,9 @@
 import Session from './driver/session'
 import Local from './driver/local'
 class Storage {
-  static default
-  static session
-  static local
+  static default = null
+  static session = null
+  static local = null
   static prefx = ''
 
   constructor(prefx = '') {
@@ -14,26 +14,26 @@ class Storage {
   }
 
   get session () {
-    if (Storage.session) {
-      return Storage.session
+    if (!Storage.session) {
+      Storage.session = new Session(this.prefx)
     }
-    Storage.session = new Session(this.prefx)
+
     return Storage.session
   }
 
   get local () {
-    if (Storage.local) {
-      return Storage.local
+    if (!Storage.local) {
+      Storage.local = new Local(this.prefx)
     }
-    Storage.local = new Local(this.prefx)
+    
     return Storage.local
   }
 
   get default () {
-    if (Storage.default) {
-      return Storage.default
+    if (!Storage.default) {
+      Storage.default = new Session(this.prefx)
     }
-    Storage.default = new Session(this.prefx)
+    
     return Storage.default
   }
 
@@ -43,8 +43,8 @@ class Storage {
   get (key) {
     return this.default.get(key)
   }
-  delete(key) {
-    this.default.delete(key)
+  rm(key) {
+    this.default.rm(key)
   }
 }
 

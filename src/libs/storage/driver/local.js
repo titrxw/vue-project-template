@@ -1,28 +1,55 @@
 import Memory from './memory'
-export default class Local extends Memory{
-  set(key, value) {
+export default class Local extends Memory {
+  set(key, value, expire = 0) {
+    if (!value) {
+      return false;
+    }
     super.set(key, value)
+    key = super.getKey(key)
     if (typeof value == 'object' || typeof value == 'array') {
       value = JSON.stringify(value)
     }
-    localStorage.setItem(super.getKey(key), value)
+    localStorage.setItem(key, value)
+    if (expire > 0) {
+      this.set(key +'-expire', {
+        cur: new Date().valueOf(),
+        expire: expire
+      })
+    }
   }
-  get(key) {
+  get(key, _default) {
+    let expire = null
+    try{
+      expire = JSON.parse(localStorage.getItem(super.getKey(key) +'-expire'))
+    } catch (e) {
+      expire = null
+    }
+    if (expire) {
+      let ctime = new Date().valueOf();
+      if (ctime - expire.cur > expire.expire) {
+        this.rm(key)
+        return _default
+      }
+    }
+
     let value = super.get(key)
-    if (!(value != null && value != undefined && value != '')) {
-      value = localStorage.getItem(super.getKey(key))
+    if (!value) {
       try {
-        value = JSON.parse(value)
+        value = JSON.parse(localStorage.getItem(super.getKey(key)))
       } catch (e) {
-        value = value
+        value = _default
+      }
+      if (!value) {
+        data = _default
       }
       super.set(key, value)
     }
 
     return value
   }
-  delete(key) {
-    super.delete(key)
+  rm(key) {
+    super.rm(key)
     localStorage.removeItem(super.getKey(key))
+    localStorage.removeItem(super.getKey(key) +'-expire')
   }
 }
