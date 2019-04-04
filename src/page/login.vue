@@ -41,8 +41,7 @@ export default {
       }
       let result = await this.$api.bind(this.form)
       if (result) {
-        this.$storage.set('token', result.token);
-        this.$storage.set('last_login_time', Date.parse(new Date()) / 1000);
+        this.$storage.set('token', result.token, Vue.onlineHour * 60 * 60 * 1000);
         this.$store.dispatch('reset')
         this.$router.push({path: '/'});
       }

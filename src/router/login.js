@@ -1,12 +1,7 @@
 import Vue from 'vue'
 export default function (to, from, next) {
-  let lastTime = Vue.storage.get('last_login_time')
-  let curTime = Date.parse(new Date()) / 1000;
-  if (lastTime && (curTime - lastTime) > (Vue.onlineHour * 60 * 55)) {
-    Vue.storage.delete('token')
-  }
 
-
+  Vue.storage.get('token')
   let token = Vue.storage.get('token')
 
   if (to.meta.requireLogin === true && !token) {
