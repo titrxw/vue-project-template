@@ -30,12 +30,15 @@ Vue.directive('submit', {
         function clickHandler(e) {
             // 这里判断点击的元素是否是本身，是本身，则返回
             // 点击时间间隔
-            if (el.contains(e.target) && (e.timeStamp - e.srcElement.timeStamp <= 600)) {
+            if (!el.contains(e.target)) {
+                return false;
+            }
+            if (e.timeStamp - e.srcElement.timeStamp <= 600) {
                 e.srcElement.timeStamp = e.timeStamp
                 return false;
             }
             e.srcElement.timeStamp = e.timeStamp
-            
+
             // 判断指令中是否绑定了函数
             if (binding.expression) {
                 let arg = []
@@ -45,7 +48,7 @@ Vue.directive('submit', {
                 if (e.target.dataset.args) {
                     arg.push(e.target.dataset.args)
                 }
-                binding.value(e,...arg);
+                binding.value(e, ...arg);
             }
         }
         // 给当前元素绑定个私有变量，方便在unbind中可以解除事件监听
