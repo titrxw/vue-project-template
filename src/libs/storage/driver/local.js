@@ -28,6 +28,11 @@ export default class Session extends Memory {
       if (ctime - expire.cur > expire.expire) {
         this.rm(key)
         return _default
+      } else {
+        this.set(key +'-expire', {
+          cur: new Date().valueOf(),
+          expire: expire.expire
+        })
       }
     }
 
@@ -51,5 +56,9 @@ export default class Session extends Memory {
     super.rm(key)
     localStorage.removeItem(super.getKey(key))
     localStorage.removeItem(super.getKey(key +'-expire'))
+  }
+  clear () {
+    super.clear()
+    localStorage.clear()
   }
 }

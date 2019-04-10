@@ -20,4 +20,7 @@ export default class Memery {
   rm(key) {
     delete this.data[this.getKey(key)]
   }
+  clear () {
+    this.data = {}
+  }
 }
