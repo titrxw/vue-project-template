@@ -3,12 +3,10 @@
  */
 import Session from './driver/session'
 import Local from './driver/local'
-import Cookie from './driver/cookie'
 class Storage {
   static default = null
   static session = null
   static local = null
-  static cookie = null
   static prefx = ''
 
   constructor(prefx = '') {
@@ -29,14 +27,6 @@ class Storage {
     }
     
     return Storage.local
-  }
-
-  get cookie () {
-    if (!Storage.cookie) {
-      Storage.cookie = new Cookie(this.prefx)
-    }
-    
-    return Storage.cookie
   }
 
   get default () {
