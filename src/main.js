@@ -13,26 +13,15 @@ Vue.use(api);
 Vue.use(storage)
 
 
-
-/*************************************处理按钮点击后如果有请求的话，只有放请求完成后才可以继续点  v-submit****************************************/
-
-Vue.beforeRequest = function() {
-    Vue.hasSubmit = true
-}
-
-Vue.afterRequest = function() {
-    Vue.hasSubmit = false
-}
-
 Vue.directive('submit', {
     // 当被绑定的元素插入到 DOM 中时……
     bind(el, binding, vnode) {
         function clickHandler(e) {
             // 这里判断点击的元素是否是本身，是本身，则返回
-            // 点击时间间隔
             if (!el.contains(e.target)) {
                 return false;
             }
+            // 点击时间间隔,　也可以按照请求是否结束来处理
             if (e.timeStamp - e.srcElement.timeStamp <= 600) {
                 e.srcElement.timeStamp = e.timeStamp
                 return false;

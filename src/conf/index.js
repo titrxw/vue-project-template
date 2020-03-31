@@ -17,6 +17,5 @@ if (process.env.NODE_ENV === 'production') {
     Vue.prototype.clientHost = 'http://test.com/test/alpha/test/#/'
     Vue.prototype.imgHost = 'http://test.com/uploads/'
     Vue.prototype.uploadHost = 'http://test.com/upload/test/common/upload'
-        // sessionStorage.setItem('unionId', 'o7vXt0lpqv237J5UEUWDbycE-soVJE')
     Vue.prototype.G = DevConf
 }
