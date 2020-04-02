@@ -3,16 +3,16 @@ export default class Local {
     if (!value) {
       return false;
     }
-    if (typeof value == 'object' || typeof value == 'array') {
+    if (typeof value == "object" || typeof value == "array") {
       value = JSON.stringify(value)
     }
     localStorage.setItem(key, value)
     if (expire > 0) {
-      this.set(key +'-expire', new Date().valueOf() + expire)
+      this.set(key + '-expire', new Date().valueOf() + expire)
     }
   }
   get(key, _default) {
-    let expire = localStorage.getItem(key +'-expire')
+    let expire = localStorage.getItem(key + '-expire')
     if (expire) {
       let ctime = new Date().valueOf();
       if (ctime > expire) {
@@ -36,9 +36,9 @@ export default class Local {
   }
   rm(key) {
     localStorage.removeItem(key)
-    localStorage.removeItem(key +'-expire')
+    localStorage.removeItem(key + '-expire')
   }
-  clear () {
+  clear() {
     localStorage.clear()
   }
 }

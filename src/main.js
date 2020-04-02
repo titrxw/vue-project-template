@@ -15,13 +15,13 @@ Vue.use(storage)
 
 Vue.directive('submit', {
     // 当被绑定的元素插入到 DOM 中时……
-    bind(el, binding, vnode) {
+    bind(el, binding) {
         function clickHandler(e) {
             // 这里判断点击的元素是否是本身，是本身，则返回
             if (!el.contains(e.target)) {
                 return false;
             }
-            // 点击时间间隔,　也可以按照请求是否结束来处理
+            // 点击时间间隔,也可以按照请求是否结束来处理
             if (e.timeStamp - e.srcElement.timeStamp <= 600) {
                 e.srcElement.timeStamp = e.timeStamp
                 return false;
@@ -44,20 +44,15 @@ Vue.directive('submit', {
         el.__vueSubmit__ = clickHandler;
         document.addEventListener('mousedown', clickHandler);
     },
-    unbind(el, binding) {
+    unbind(el) {
         // 解除事件监听
         document.removeEventListener('mousedown', el.__vueSubmit__);
         delete el.__vueSubmit__;
     }
 })
 
-/* eslint-disable no-new */
 new Vue({
-    el: '#app',
     router,
     store,
-    template: '<App/>',
-    components: {
-        App
-    }
-})
+    render: h => h(App)
+  }).$mount('#app')

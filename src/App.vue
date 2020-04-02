@@ -1,7 +1,7 @@
 <template>
-  <transition name="page-move">
+  <div id="app">
     <router-view class="page-view"></router-view>
-  </transition>
+  </div>
 </template>
 <script>
 export default {
@@ -30,13 +30,5 @@ export default {
   top: 0px;
   width: 100%;
   height: 100%;
-}
-
-.page-move-enter-active,
-.page-move-leave-active {
-  transition: opacity 0.3s;
-}
-.page-move-enter, .page-move-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
 }
 </style>
