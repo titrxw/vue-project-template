@@ -7,6 +7,7 @@ import storage from './libs/storage'
 import router from './router'
 import './assets/style/common.less'
 import App from './App'
+import Vconsole from 'vconsole'
 
 Vue.use(error);
 Vue.use(api);
@@ -50,6 +51,8 @@ Vue.directive('submit', {
         delete el.__vueSubmit__;
     }
 })
+
+process.env.NODE_ENV === 'development' && new Vconsole()
 
 new Vue({
     router,
