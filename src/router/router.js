@@ -2,7 +2,7 @@ export default [
   {
     path: '*',
     component: function (resolve) {
-      require(['../page/404'], resolve)
+      require(['../view/404'], resolve)
     }
   },
   {
@@ -15,7 +15,7 @@ export default [
       showNavBar: false
     },
     component: function (resolve) {
-      require(['../page/login'], resolve)
+      require(['../view/login'], resolve)
     }
   },
   {
@@ -27,7 +27,7 @@ export default [
       showNavBar: false
     },
     component: function (resolve) {
-      require(['../page/login'], resolve)
+      require(['../view/login'], resolve)
     }
   },
   {
@@ -40,7 +40,7 @@ export default [
       keepAlive: false
     },
     component: function (resolve) {
-      require(['../page/wechat/auth'], resolve)
+      require(['../view/wechat/auth'], resolve)
     }
   }
 ]
