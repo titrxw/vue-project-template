@@ -3,7 +3,7 @@ export default class Session {
     if (!value) {
       return false;
     }
-    if (typeof value == 'object' || typeof value == 'array') {
+    if (typeof value === 'object') {
       value = JSON.stringify(value)
     }
     sessionStorage.setItem(key, value)

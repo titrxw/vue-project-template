@@ -3,7 +3,7 @@ export default class Local {
     if (!value) {
       return false;
     }
-    if (typeof value == "object" || typeof value == "array") {
+    if (typeof value === "object") {
       value = JSON.stringify(value)
     }
     localStorage.setItem(key, value)

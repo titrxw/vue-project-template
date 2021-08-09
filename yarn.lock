@@ -7999,11 +7999,6 @@ vm-browserify@^1.0.1:
   resolved "https://registry.npm.taobao.org/vm-browserify/download/vm-browserify-1.1.2.tgz?cache=0&sync_timestamp=1572870772154&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvm-browserify%2Fdownload%2Fvm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
   integrity sha1-eGQcSIuObKkadfUR56OzKobl3aA=
 
-vue-console@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/vue-console/-/vue-console-2.1.1.tgz#d822632b3ed6d8db21b8211126f8ba235d7d0c8a"
-  integrity sha512-cE2Oc+U/eIGqtYarIW/OTCioIvZwevcyu5EtWsZhPJQ6W2TTDSJDGFnvNo6ANxGjSUrkP7Yhk2IO8apOrVcMow==
-
 vue-eslint-parser@^7.0.0:
   version "7.0.0"
   resolved "https://registry.npm.taobao.org/vue-eslint-parser/download/vue-eslint-parser-7.0.0.tgz#a4ed2669f87179dedd06afdd8736acbb3a3864d6"
