@@ -6,7 +6,6 @@
   </div>
 </template>
 <script>
-import Vue from 'vue'
 export default {
   data() {
     return {
@@ -34,7 +33,6 @@ export default {
         this.$storage.set(
           "token",
           result.token,
-          Vue.onlineHour * 60 * 60 * 1000
         );
         this.$store.dispatch("reset");
         this.$router.push({ path: "/" });

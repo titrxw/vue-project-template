@@ -13,8 +13,8 @@ let api = {
 }
 
 export default {
-    install: function(Vue) {
-        Vue.api = api
-        Vue.prototype.$api = api
+    install: function(app) {
+        app.provide('$api', api)
+        app.config.globalProperties.$api = api
     }
 }

@@ -1,11 +1,10 @@
-import Vue from 'vue'
+import storage from '../libs/storage'
 export default function (to, from, next) {
-
-  Vue.storage.get('token')
-  let token = Vue.storage.get('token')
+  storage.get('token')
+  let token = storage.get('token')
 
   if (to.meta.requireLogin === true && !token) {
-    Vue.storage.set('redirect', to.fullPath)
+    storage.set('redirect', to.fullPath)
     next({
       path: '/login'
     })

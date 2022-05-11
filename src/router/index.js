@@ -1,12 +1,10 @@
-import Vue from 'vue'
 import RouterConf from './router.js'
-import Router from 'vue-router'
+import {createRouter, createWebHashHistory} from 'vue-router'
 import login from './login'
 
-Vue.use(Router)
-
-let router = new Router({
-  routes: RouterConf
+let router = createRouter({
+  routes: RouterConf,
+  history: createWebHashHistory()
 })
 
 router.beforeEach(function (to, from, next) {

@@ -1,9 +1,7 @@
 export default [
   {
-    path: '*',
-    component: function (resolve) {
-      require(['../view/404'], resolve)
-    }
+    path: '/*',
+    component: () => import('../view/404')
   },
   {
     path: '/',
@@ -14,9 +12,7 @@ export default [
       showTabBar: true,
       showNavBar: false
     },
-    component: function (resolve) {
-      require(['../view/login'], resolve)
-    }
+    component: () => import('../view/login')
   },
   {
     path: '/login',
@@ -26,9 +22,7 @@ export default [
       showTabBar: false,
       showNavBar: false
     },
-    component: function (resolve) {
-      require(['../view/login'], resolve)
-    }
+    component: () => import('../view/login')
   },
   {
     path: '/wechatAuth',
@@ -39,8 +33,6 @@ export default [
       showNavBar: false,
       keepAlive: false
     },
-    component: function (resolve) {
-      require(['../view/wechat/auth'], resolve)
-    }
+    component: () => import('../view/wechat/auth')
   }
 ]

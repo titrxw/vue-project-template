@@ -1,9 +1,9 @@
-import Vue from 'vue'
+import config from '../conf'
 import axios from 'axios'
 import store from '../store'
 // 配置
 axios.defaults.timeout = 50000
-axios.defaults.baseURL = Vue.apiHost
+axios.defaults.baseURL = config.apiHost
 
 axios.interceptors.request.use(
     config => {

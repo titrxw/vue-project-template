@@ -1,6 +1,5 @@
-import Vue from 'vue'
-import './conf'
-import error from './libs/error'
+import {createApp} from 'vue'
+import config from './conf'
 import api from './api'
 import store from './store'
 import storage from './libs/storage'
@@ -9,12 +8,14 @@ import './assets/style/common.less'
 import App from './App'
 import Vconsole from 'vconsole'
 
-Vue.use(error);
-Vue.use(api);
-Vue.use(storage)
 
+process.env.NODE_ENV === 'development' && new Vconsole()
 
-Vue.directive('submit', {
+const app = createApp(App).use(store).use(api).use(router)
+app.config.globalProperties.$config = config
+app.config.globalProperties.$storage = storage
+
+app.directive('submit', {
     // 当被绑定的元素插入到 DOM 中时……
     bind(el, binding) {
         function clickHandler(e) {
@@ -52,10 +53,4 @@ Vue.directive('submit', {
     }
 })
 
-process.env.NODE_ENV === 'development' && new Vconsole()
-
-new Vue({
-    router,
-    store,
-    render: h => h(App)
-}).$mount('#app')
+app.mount('#app')

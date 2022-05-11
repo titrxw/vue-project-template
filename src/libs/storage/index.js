@@ -51,9 +51,4 @@ class Storage {
   }
 }
 
-export default {
-  install: function (Vue) {
-    Vue.storage = new Storage('')
-    Vue.prototype.$storage = Vue.storage
-  }
-}
+export default new Storage('')
